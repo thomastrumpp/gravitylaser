@@ -1,0 +1,32 @@
+GCODE:
+; --- GravityLaser G-Code Header ---
+$32=1 ; Laser-Modus aktivieren
+G10 L20 P1 X0 Y0 ; Kalibriere physikalischen Startpunkt als 0/0
+G90 ; Absolute Positionierung
+G21 ; Einheiten in mm
+G54 ; Werkstückkoordinatensystem G54
+M5 ; Laser ausschalten zur Sicherheit
+G0 F6000 ; Jog-Vorschub setzen
+
+; --- Ebene: Schwarz (C00) (Sub-Layer Modus: Line) ---
+M9 ; Air Assist AUS
+; --- Layer C00 Sub-Layer Start ---
+M5
+G1 F3000 S800
+G0 X31.000 Y278.000
+M3 S800
+G1 X56.000 Y278.000 S800 F3000
+G1 X56.000 Y253.000 S800 F3000
+G1 X31.000 Y253.000 S800 F3000
+G1 X31.000 Y278.000 S800 F3000
+M5
+
+; --- GravityLaser G-Code Footer ---
+M5 ; Laser aus
+M9 ; Air Assist aus
+; Soft Landing: schnell bis 10mm vor Parkposition, dann langsam einfahren
+G0 X10 Y10 ; Schnell bis 10mm vor 0/0
+G1 X0 Y0 F500 ; Langsam in Parkposition einfahren
+M2 ; Programmende
+BOUNDS:
+{"minX":0,"maxX":56,"minY":0,"maxY":278}

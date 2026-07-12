@@ -1,0 +1,167 @@
+
+ RUN  v4.1.9 /home/thomas/Antigravity_Projects/TTS10/frontend
+
+stdout | tests/unit/user_vorgabe_simulation.test.ts > Rotated Coordinate System & Positioning Validation > User Vorgabe: Exact simulation verification > Heart Path outline bounds match canvas location (centered at X=93.15, Y=152.2)
+HEART GCODE:
+ ; --- GravityLaser G-Code Header ---
+$32=1 ; Laser-Modus aktivieren
+G10 L20 P1 X0 Y0 ; Kalibriere physikalischen Startpunkt als 0/0
+G90 ; Absolute Positionierung
+G21 ; Einheiten in mm
+G54 ; Werkstückkoordinatensystem G54
+M5 ; Laser ausschalten zur Sicherheit
+G0 F6000 ; Jog-Vorschub setzen
+
+; --- Ebene: Schwarz (C00) (Modus: line) ---
+M9 ; Air Assist AUS
+; --- Layer C00 Start ---
+M5
+G1 F4000 S300
+G0 X93.150 Y121.025
+M3 S300
+G1 X92.608 Y121.773 S300 F4000
+G1 X91.138 Y123.915 S300 F4000
+G1 X88.970 Y127.294 S300 F4000
+G1 X86.339 Y131.758 S300 F4000
+G1 X83.475 Y137.150 S300 F4000
+G1 X80.611 Y143.316 S300 F4000
+G1 X77.980 Y150.102 S300 F4000
+G1 X75.812 Y157.351 S300 F4000
+G1 X74.342 Y164.911 S300 F4000
+G1 X73.800 Y172.625 S300 F4000
+G1 X74.052 Y177.269 S300 F4000
+G1 X74.780 Y180.881 S300 F4000
+G1 X75.948 Y183.461 S300 F4000
+G1 X77.515 Y185.009 S300 F4000
+G1 X79.444 Y185.525 S300 F4000
+G1 X81.695 Y185.009 S300 F4000
+G1 X84.230 Y183.461 S300 F4000
+G1 X87.010 Y180.881 S300 F4000
+G1 X89.996 Y177.269 S300 F4000
+G1 X93.150 Y172.625 S300 F4000
+G1 X96.304 Y177.269 S300 F4000
+G1 X99.290 Y180.881 S300 F4000
+G1 X102.070 Y183.461 S300 F4000
+G1 X104.605 Y185.009 S300 F4000
+G1 X106.856 Y185.525 S300 F4000
+G1 X108.785 Y185.009 S300 F4000
+G1 X110.352 Y183.461 S300 F4000
+G1 X111.520 Y180.881 S300 F4000
+G1 X112.248 Y177.269 S300 F4000
+G1 X112.500 Y172.625 S300 F4000
+G1 X111.958 Y164.911 S300 F4000
+G1 X110.488 Y157.351 S300 F4000
+G1 X108.320 Y150.102 S300 F4000
+G1 X105.689 Y143.316 S300 F4000
+G1 X102.825 Y137.150 S300 F4000
+G1 X99.961 Y131.758 S300 F4000
+G1 X97.330 Y127.294 S300 F4000
+G1 X95.162 Y123.915 S300 F4000
+G1 X93.692 Y121.773 S300 F4000
+G1 X93.150 Y121.025 S300 F4000
+G1 X93.150 Y121.025 S300 F4000
+M5
+
+; --- GravityLaser G-Code Footer ---
+M5 ; Laser aus
+M9 ; Air Assist aus
+; Soft Landing: schnell bis 10mm vor Parkposition, dann langsam einfahren
+G0 X10 Y10 ; Schnell bis 10mm vor 0/0
+G1 X0 Y0 F500 ; Langsam in Parkposition einfahren
+M2 ; Programmende
+HEART PATH CMDS:
+cmd 0: { type: 'M', x: 0, y: 37.5 } type: undefined x1: undefined
+cmd 1: { type: 'C', x1: 0, y1: 37.5, x2: -22.5, y2: 7.5, x: -22.5, y: -22.5 } type: number x1: 0
+cmd 2: {
+  type: 'C',
+  x1: -22.5,
+  y1: -42.5,
+  x2: -12.5,
+  y2: -42.5,
+  x: 0,
+  y: -22.5
+} type: number x1: -22.5
+cmd 3: {
+  type: 'C',
+  x1: 12.5,
+  y1: -42.5,
+  x2: 22.5,
+  y2: -42.5,
+  x: 22.5,
+  y: -22.5
+} type: number x1: 12.5
+cmd 4: { type: 'C', x1: 22.5, y1: 7.5, x2: 0, y2: 37.5, x: 0, y: 37.5 } type: number x1: 22.5
+cmd 5: { type: 'Z' } type: undefined x1: undefined
+
+stdout | tests/unit/user_vorgabe_simulation.test.ts > Rotated Coordinate System & Positioning Validation > User Vorgabe: Exact simulation verification > Rotated Text bounds are correctly centered at X=100, Y=100
+TEXT MODIFIED GCODE SNIPPET:
+ ; --- GravityLaser G-Code Header ---
+$32=1 ; Laser-Modus aktivieren
+G10 L20 P1 X0 Y0 ; Kalibriere physikalischen Startpunkt als 0/0
+G90 ; Absolute Positionierung
+G21 ; Einheiten in mm
+G54 ; Werkstückkoordinatensystem G54
+M5 ; Laser ausschalten zur Sicherheit
+G0 F6000 ; Jog-Vorschub setzen
+
+; --- Ebene: Schwarz (C00) (Modus: line) ---
+M9 ; Air Assist AUS
+; --- Layer C00 Start ---
+M5
+G1 F4000 S300
+; --- Start Raster Image scan (507x515) ---
+M3 ; Laser-Modus aktivieren
+M5 ; Laser ausschalten nach Raster
+; --- Ende Raster Image scan ---
+
+; --- GravityLaser G-Code Footer ---
+M5 ; Laser aus
+M9 ; Air Assist aus
+; Soft Landing: schnell bis 10mm vor Parkposition, dann langsam einfahren
+G0 X10 Y10 ; Schnell bis 10mm vor 0/0
+G1 X0 Y0 F500 ; Langsam in Parkposition einfahren
+M2 ; Programmende
+TEXT BOUNDS: null
+
+ ❯ tests/unit/user_vorgabe_simulation.test.ts (35 tests | 2 failed) 56ms
+       × Heart Path outline bounds match canvas location (centered at X=93.15, Y=152.2) 13ms
+       ✓ Ellipse outline bounds match canvas location (centered at X=135, Y=175) 1ms
+       × Rotated Text bounds are correctly centered at X=100, Y=100 28ms
+       ✓ Case Ellipse Angle=0° Scale=0.5 maintains correct absolute center 1ms
+       ✓ Case Ellipse Angle=0° Scale=1 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=0° Scale=2 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=45° Scale=0.5 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=45° Scale=1 maintains correct absolute center 3ms
+       ✓ Case Ellipse Angle=45° Scale=2 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=90° Scale=0.5 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=90° Scale=1 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=90° Scale=2 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=135° Scale=0.5 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=135° Scale=1 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=135° Scale=2 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=180° Scale=0.5 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=180° Scale=1 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=180° Scale=2 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=227° Scale=0.5 maintains correct absolute center 1ms
+       ✓ Case Ellipse Angle=227° Scale=1 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=227° Scale=2 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=270° Scale=0.5 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=270° Scale=1 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=270° Scale=2 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=315° Scale=0.5 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=315° Scale=1 maintains correct absolute center 0ms
+       ✓ Case Ellipse Angle=315° Scale=2 maintains correct absolute center 0ms
+       ✓ Case Circle Angle=0° with Kerf offset maintains correct center 0ms
+       ✓ Case Circle Angle=45° with Kerf offset maintains correct center 0ms
+       ✓ Case Circle Angle=90° with Kerf offset maintains correct center 0ms
+       ✓ Case Circle Angle=135° with Kerf offset maintains correct center 0ms
+       ✓ Case Circle Angle=180° with Kerf offset maintains correct center 0ms
+       ✓ Case Circle Angle=227° with Kerf offset maintains correct center 0ms
+       ✓ Case Circle Angle=270° with Kerf offset maintains correct center 0ms
+       ✓ Case Circle Angle=315° with Kerf offset maintains correct center 0ms
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 33 passed (35)
+   Start at  20:36:22
+   Duration  941ms (transform 118ms, setup 52ms, import 127ms, tests 56ms, environment 547ms)
+

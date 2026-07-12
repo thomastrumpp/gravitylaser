@@ -1,0 +1,69 @@
+import { Store } from './store';
+
+export type OriginPosition = 'BottomLeft' | 'TopLeft' | 'TopRight' | 'BottomRight' | 'Center';
+
+export interface MachineSettings {
+  workingSizeX: number;
+  workingSizeY: number;
+  origin: OriginPosition;
+  resolution: number;
+  units: 'mm' | 'cm' | 'inch';
+  laserMode: 'M3' | 'M4';
+  selectedMaterialId: string;
+  materialThickness: number;
+  optimalFocusZ: number;
+  backlashX: number;
+  backlashY: number;
+  cameraType: 'usb' | 'ip';
+  cameraIpUrl: string;
+  cameraOpacity: number;
+  cameraK1: number;
+  cameraK2: number;
+  cameraHomography: number[] | null;
+}
+
+const defaultSettings: MachineSettings = {
+  workingSizeX: 300,
+  workingSizeY: 300,
+  origin: 'BottomLeft', // GRBL typically operates in positive workspace or requires offset, TTS-10 PRO homes to Front-Left (Bottom-Left)
+  resolution: 0.1,
+  units: 'mm',
+  laserMode: 'M3',
+  selectedMaterialId: 'pappel_sperrholz',
+  materialThickness: 3.0,
+  optimalFocusZ: 0,
+  backlashX: 0,
+  backlashY: 0,
+  cameraType: 'usb',
+  cameraIpUrl: 'http://192.168.1.100:8080/shot.jpg',
+  cameraOpacity: 0.5,
+  cameraK1: 0.0,
+  cameraK2: 0.0,
+  cameraHomography: null
+};
+
+class SettingsStore extends Store<MachineSettings> {
+  constructor() {
+    // Try to load from localStorage
+    const saved = localStorage.getItem('gravitylaser_settings');
+    let initial = defaultSettings;
+    if (saved) {
+      try {
+        initial = { ...defaultSettings, ...JSON.parse(saved) };
+      } catch (e) {
+        console.warn('Failed to parse saved settings', e);
+      }
+    }
+    super(initial);
+  }
+
+  public updateSettings(updates: Partial<MachineSettings>) {
+    this.update((state) => {
+      const newState = { ...state, ...updates };
+      localStorage.setItem('gravitylaser_settings', JSON.stringify(newState));
+      return newState;
+    });
+  }
+}
+
+export const settingsStore = new SettingsStore();
