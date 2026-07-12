@@ -10,3 +10,4 @@ env/
 *.pyc
 .vscode/
 .idea/
+svg/
