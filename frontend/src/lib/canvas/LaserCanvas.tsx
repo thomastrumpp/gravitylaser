@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as fabric from 'fabric';
 import { useStore } from '../stores/store';
-import { canvasStore } from '../stores/canvasStore';
+import { canvasStore, type ToolType } from '../stores/canvasStore';
 import { layersStore } from '../stores/layersStore';
 import { settingsStore } from '../stores/settingsStore';
 import { consoleStore } from '../stores/consoleStore';
@@ -477,10 +477,27 @@ export const LaserCanvas: React.FC = () => {
       canvasStore.setZoomLevel(zoom);
     });
 
+    let toolBeforeSpacePan: ToolType | null = null;
+    let isSpaceKeyDown = false;
+
     // 5. Tastenkürzel (z.B. Entf-Taste zum Löschen selektierter Objekte, ESC und Werkzeuge)
     const handleKeyDown = (e: KeyboardEvent) => {
       // Wenn der Fokus in einem Eingabefeld liegt, ignorieren wir alle Shortcuts
       if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') {
+        return;
+      }
+
+      // Spacebar-Hold zum Verschieben der Arbeitsfläche
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        if (!isSpaceKeyDown) {
+          isSpaceKeyDown = true;
+          const currentTool = canvasStore.get().activeTool;
+          if (currentTool !== 'pan') {
+            toolBeforeSpacePan = currentTool;
+            canvasStore.setActiveTool('pan');
+          }
+        }
         return;
       }
 
@@ -725,7 +742,20 @@ export const LaserCanvas: React.FC = () => {
       }
     };
 
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === ' ' || e.code === 'Space') {
+        if (isSpaceKeyDown) {
+          isSpaceKeyDown = false;
+          if (toolBeforeSpacePan) {
+            canvasStore.setActiveTool(toolBeforeSpacePan);
+            toolBeforeSpacePan = null;
+          }
+        }
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
 
     // Multi-Selection auch mit STRG-Taste erlauben
     // Nutzen 'mouse:down:before' in Fabric 6, damit wir die vorherige Selektion kennen, BEVOR Fabric sie löscht
@@ -1653,6 +1683,7 @@ export const LaserCanvas: React.FC = () => {
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
       window.removeEventListener('loadSVG', handleLoadSVG);
       window.removeEventListener('loadDXF', handleLoadDXF);
       window.removeEventListener('loadImage', handleLoadImage);

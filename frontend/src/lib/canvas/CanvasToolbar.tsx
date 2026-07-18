@@ -3,7 +3,6 @@ import { useStore } from '../stores/store';
 import { canvasStore, type ToolType } from '../stores/canvasStore';
 import {
   MousePointer,
-  Hand,
   Type,
   Square,
   Circle,
@@ -78,14 +77,6 @@ export const CanvasToolbar: React.FC = () => {
         title={t('toolbar.select', 'Auswahlwerkzeug (S)')}
       >
         <MousePointer size={18} strokeWidth={1.75} />
-      </button>
-
-      <button
-        className={`tool-button ${activeTool === 'pan' ? 'active' : ''}`}
-        onClick={() => canvasStore.setActiveTool('pan')}
-        title={t('toolbar.pan', 'Arbeitsfläche verschieben (P)')}
-      >
-        <Hand size={18} strokeWidth={1.75} />
       </button>
 
       <button
