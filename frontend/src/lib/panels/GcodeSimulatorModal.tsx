@@ -501,7 +501,7 @@ export const GcodeSimulatorModal: React.FC<GcodeSimulatorModalProps> = ({ gcode,
         
         <div className="modal-header" style={{ borderBottom: '1px solid var(--border-color)', padding: '12px 20px', backgroundColor: 'var(--bg-panel-header)' }}>
           <h3 className="modal-title" style={{ color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: 'bold' }}>
-            <span>📊</span> 3D Laser G-Code Preview
+            <span>📊</span> Laser G-Code Simulation
           </h3>
           <button className="modal-close" onClick={onClose} style={{ color: 'var(--text-muted)' }}>&times;</button>
         </div>

@@ -92,7 +92,7 @@
     "export_gcode": "Export G-Code",
     "tooltip_export": "Download G-Code",
     "simulate": "Simulate",
-    "tooltip_simulate": "Show in 3D simulator",
+    "tooltip_simulate": "Show in simulation",
     "frame": "Frame",
     "tooltip_frame": "Trace job outline with laser head",
     "batch": "Batch Production (CSV)",
@@ -391,7 +391,7 @@
   "modal_gcode_editor": {
     "title": "G-Code Editor & Preview",
     "cancel": "Cancel",
-    "simulate": "3D Simulate",
+    "simulate": "Simulate",
     "run": "Run Laser",
     "origin_top_left": "Back Left (Top-Left)",
     "desc_top_left": "Place the laser head at the back-left corner of the material before starting!",

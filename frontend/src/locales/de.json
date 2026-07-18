@@ -105,7 +105,7 @@
     "export_gcode": "G-Code exportieren",
     "tooltip_export": "G-Code herunterladen",
     "simulate": "Simulieren",
-    "tooltip_simulate": "Im 3D-Simulator anzeigen",
+    "tooltip_simulate": "In der Simulation anzeigen",
     "frame": "Rahmen abfahren (Frame)",
     "tooltip_frame": "Laser-Kopf den Umriss des Jobs abfahren lassen",
     "batch": "Serienfertigung (CSV / Serial)",
@@ -308,7 +308,7 @@
   "modal_gcode_editor": {
     "title": "G-Code Editor & Vorschau",
     "cancel": "Abbrechen",
-    "simulate": "3D Simulieren",
+    "simulate": "Simulieren",
     "run": "Jetzt Lasern",
     "origin_top_left": "Hinten Links (Top-Left)",
     "desc_top_left": "Stelle den Laserkopf vor dem Start an der hinteren linken Ecke des Materials auf!",
