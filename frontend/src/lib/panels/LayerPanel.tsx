@@ -54,63 +54,68 @@ export const LayerPanel: React.FC = () => {
         <div className="section-header">
           <span className="section-title">🪵 {t('layers.material_profile', 'Material-Profil')}</span>
         </div>
-        <div className="section-content" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div className="form-group">
-            <label className="form-label">{t('layers.material', 'Material')}</label>
-            <select
-              className="form-input"
-              value={settings.selectedMaterialId}
-              onChange={(e) => settingsStore.updateSettings({ selectedMaterialId: e.target.value })}
-              style={{
-                width: '100%',
-                backgroundColor: 'var(--bg-input)',
-                color: 'var(--text-color)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '4px',
-                padding: '6px',
-                cursor: 'pointer'
-              }}
-            >
-              {Object.values(MATERIALS).map((m) => (
-                <option key={m.id} value={m.id}>
-                  {m.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          
-          {activeMaterial && activeMaterial.supportedOps.includes('cut') && (
-            <div className="form-group">
-              <label className="form-label">{t('layers.thickness', 'Materialstärke (mm)')}</label>
-              <input
-                type="text"
+        <div className="section-content" style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '8px 12px' }}>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+            <div className="form-group" style={{ flex: activeMaterial && activeMaterial.supportedOps.includes('cut') ? 1.8 : 1, marginBottom: 0 }}>
+              <label className="form-label" style={{ fontSize: '10px', marginBottom: '2px' }}>{t('layers.material', 'Material')}</label>
+              <select
                 className="form-input"
-                value={localThickness}
-                onChange={(e) => {
-                  setLocalThickness(e.target.value);
-                  const parsed = parseFloat(e.target.value.replace(',', '.'));
-                  if (!isNaN(parsed) && parsed >= 0) {
-                    settingsStore.updateSettings({ materialThickness: parsed });
-                  }
+                value={settings.selectedMaterialId}
+                onChange={(e) => settingsStore.updateSettings({ selectedMaterialId: e.target.value })}
+                style={{
+                  width: '100%',
+                  backgroundColor: 'var(--bg-input)',
+                  color: 'var(--text-color)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '4px',
+                  padding: '6px',
+                  cursor: 'pointer',
+                  fontSize: '12px',
+                  height: '30px'
                 }}
-                onBlur={() => {
-                  if (localThickness === '' || isNaN(parseFloat(localThickness))) {
-                    setLocalThickness(settings.materialThickness.toString());
-                  }
-                }}
-              />
+              >
+                {Object.values(MATERIALS).map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.name}
+                  </option>
+                ))}
+              </select>
             </div>
-          )}
+            
+            {activeMaterial && activeMaterial.supportedOps.includes('cut') && (
+              <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+                <label className="form-label" style={{ fontSize: '10px', marginBottom: '2px' }} title={t('layers.thickness', 'Materialstärke (mm)')}>{t('layers.thickness_short', 'Dicke (mm)')}</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={localThickness}
+                  style={{ fontSize: '12px', padding: '6px', height: '30px' }}
+                  onChange={(e) => {
+                    setLocalThickness(e.target.value);
+                    const parsed = parseFloat(e.target.value.replace(',', '.'));
+                    if (!isNaN(parsed) && parsed >= 0) {
+                      settingsStore.updateSettings({ materialThickness: parsed });
+                    }
+                  }}
+                  onBlur={() => {
+                    if (localThickness === '' || isNaN(parseFloat(localThickness))) {
+                      setLocalThickness(settings.materialThickness.toString());
+                    }
+                  }}
+                />
+              </div>
+            )}
+          </div>
 
           {activeMaterial?.notes && (
             <div style={{
-              fontSize: '11px',
+              fontSize: '10px',
               color: 'var(--text-muted)',
               backgroundColor: 'rgba(255, 255, 255, 0.03)',
-              padding: '6px 8px',
+              padding: '4px 8px',
               borderRadius: '4px',
               borderLeft: '3px solid var(--primary-color)',
-              lineHeight: '1.4'
+              lineHeight: '1.3'
             }}>
               💡 {activeMaterial.notes}
             </div>
@@ -406,44 +411,48 @@ export const LayerPanel: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Geschwindigkeit */}
-                  <div className="form-group">
-                    <label className="form-label">{t('layers.speed')} (mm/min)</label>
-                    <input
-                      type="text"
-                      className="form-input"
-                      value={localSpeed}
-                      disabled={isPresetMode}
-                      style={{
-                        backgroundColor: isPresetMode ? 'rgba(255,255,255,0.02)' : 'var(--bg-input)',
-                        color: isPresetMode ? 'var(--text-muted)' : 'var(--text-color)',
-                        cursor: isPresetMode ? 'not-allowed' : 'text'
-                      }}
-                      onChange={(e) => {
-                        setLocalSpeed(e.target.value);
-                        const parsed = parseInt(e.target.value);
-                        if (!isNaN(parsed) && parsed >= 0) {
-                          handleUpdate({ speed: parsed });
-                        }
-                      }}
-                      onBlur={() => {
-                        if (localSpeed === '' || isNaN(parseInt(localSpeed))) {
-                          setLocalSpeed(selectedLayer.speed.toString());
-                        }
-                      }}
-                    />
-                  </div>
-
-                  {/* Leistung & Durchgänge */}
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label className="form-label">{t('layers.power')} (0-100%)</label>
+                  {/* Parameter: Geschwindigkeit, Leistung & Durchgänge in einer Zeile */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr', gap: '6px' }}>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" style={{ fontSize: '9px', marginBottom: '2px' }}>{t('layers.speed_short', 'Geschw.')}</label>
+                      <input
+                        type="text"
+                        className="form-input"
+                        value={localSpeed}
+                        disabled={isPresetMode}
+                        style={{
+                          fontSize: '11px',
+                          padding: '4px 6px',
+                          height: '26px',
+                          backgroundColor: isPresetMode ? 'rgba(255,255,255,0.02)' : 'var(--bg-input)',
+                          color: isPresetMode ? 'var(--text-muted)' : 'var(--text-color)',
+                          cursor: isPresetMode ? 'not-allowed' : 'text'
+                        }}
+                        onChange={(e) => {
+                          setLocalSpeed(e.target.value);
+                          const parsed = parseInt(e.target.value);
+                          if (!isNaN(parsed) && parsed >= 0) {
+                            handleUpdate({ speed: parsed });
+                          }
+                        }}
+                        onBlur={() => {
+                          if (localSpeed === '' || isNaN(parseInt(localSpeed))) {
+                            setLocalSpeed(selectedLayer.speed.toString());
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" style={{ fontSize: '9px', marginBottom: '2px' }}>{t('layers.power_short', 'Leist. %')}</label>
                       <input
                         type="text"
                         className="form-input"
                         value={localPower}
                         disabled={isPresetMode}
                         style={{
+                          fontSize: '11px',
+                          padding: '4px 6px',
+                          height: '26px',
                           backgroundColor: isPresetMode ? 'rgba(255,255,255,0.02)' : 'var(--bg-input)',
                           color: isPresetMode ? 'var(--text-muted)' : 'var(--text-color)',
                           cursor: isPresetMode ? 'not-allowed' : 'text'
@@ -462,14 +471,17 @@ export const LayerPanel: React.FC = () => {
                         }}
                       />
                     </div>
-                    <div className="form-group">
-                      <label className="form-label">{t('layers.passes')}</label>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" style={{ fontSize: '9px', marginBottom: '2px' }}>{t('layers.passes_short', 'Durchg.')}</label>
                       <input
                         type="text"
                         className="form-input"
                         value={localPasses}
                         disabled={isPresetMode}
                         style={{
+                          fontSize: '11px',
+                          padding: '4px 6px',
+                          height: '26px',
                           backgroundColor: isPresetMode ? 'rgba(255,255,255,0.02)' : 'var(--bg-input)',
                           color: isPresetMode ? 'var(--text-muted)' : 'var(--text-color)',
                           cursor: isPresetMode ? 'not-allowed' : 'text'
@@ -492,44 +504,47 @@ export const LayerPanel: React.FC = () => {
 
                   {/* Erläuterungstexte für Voreinstellungen */}
                   {selectedLayer.presetMode === 'engrave' && (
-                    <div style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
                       🔒 Profil "{activeMaterial?.name}" (Gravieren) aktiv.
                     </div>
                   )}
                   {selectedLayer.presetMode === 'cut' && (
-                    <div style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <div style={{ fontSize: '9px', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '1px', marginTop: '2px' }}>
                       <span>🔒 Profil "{activeMaterial?.name}" (Schneiden) aktiv.</span>
-                      <span style={{ fontSize: '9px', opacity: 0.8 }}>
+                      <span style={{ opacity: 0.8 }}>
                         Dicke ({settings.materialThickness}mm) / Pass-Tiefe ({activeMaterial?.maxDepthPerPass}mm) = {selectedLayer.passes} Durchgänge.
                       </span>
                     </div>
                   )}
 
-                  <div className="form-group" style={{ marginTop: '4px' }}>
-                    <label className="flex-row" style={{ cursor: isPresetMode ? 'not-allowed' : 'pointer', fontSize: '12px', fontWeight: '500' }}>
-                      <input
-                        type="checkbox"
-                        checked={selectedLayer.airAssist}
-                        disabled={isPresetMode}
-                        onChange={(e) => handleUpdate({ airAssist: e.target.checked })}
-                        style={{ width: '16px', height: '16px' }}
-                      />
-                      <span style={{ color: isPresetMode ? 'var(--text-muted)' : 'var(--text-color)' }}>
-                        {selectedLayer.presetMode === 'cut' ? `🌬️ ${t('layers.air_assist_auto_on', 'Luftunterstützung (Auto: An)')}` : selectedLayer.presetMode === 'engrave' ? `🌬️ ${t('layers.air_assist_auto_off', 'Luftunterstützung (Auto: Aus)')}` : `🌬️ ${t('layers.air_assist_manual', 'Luftunterstützung (M8/M9)')}`}
-                      </span>
-                    </label>
-                  </div>
+                  {/* Checkboxen in einer Zeile */}
+                  <div style={{ display: 'flex', gap: '12px', marginTop: '6px' }}>
+                    <div style={{ flex: 1 }}>
+                      <label className="flex-row" style={{ cursor: isPresetMode ? 'not-allowed' : 'pointer', fontSize: '11px', fontWeight: '500', gap: '4px' }}>
+                        <input
+                          type="checkbox"
+                          checked={selectedLayer.airAssist}
+                          disabled={isPresetMode}
+                          onChange={(e) => handleUpdate({ airAssist: e.target.checked })}
+                          style={{ width: '14px', height: '14px', cursor: isPresetMode ? 'not-allowed' : 'pointer' }}
+                        />
+                        <span style={{ color: isPresetMode ? 'var(--text-muted)' : 'var(--text-color)', whiteSpace: 'nowrap' }} title={selectedLayer.presetMode === 'cut' ? `🌬️ ${t('layers.air_assist_auto_on', 'Luftunterstützung (Auto: An)')}` : selectedLayer.presetMode === 'engrave' ? `🌬️ ${t('layers.air_assist_auto_off', 'Luftunterstützung (Auto: Aus)')}` : `🌬️ ${t('layers.air_assist_manual', 'Luftunterstützung (M8/M9)')}`}>
+                          🌬️ Air Assist
+                        </span>
+                      </label>
+                    </div>
 
-                  <div className="form-group" style={{ marginTop: '4px' }}>
-                    <label className="flex-row" style={{ cursor: 'pointer', fontSize: '12px', fontWeight: '500' }}>
-                      <input
-                        type="checkbox"
-                        checked={selectedLayer.output}
-                        onChange={(e) => handleUpdate({ output: e.target.checked })}
-                        style={{ width: '16px', height: '16px' }}
-                      />
-                      <span>📤 {t('layers.output')}</span>
-                    </label>
+                    <div style={{ flex: 1 }}>
+                      <label className="flex-row" style={{ cursor: 'pointer', fontSize: '11px', fontWeight: '500', gap: '4px' }}>
+                        <input
+                          type="checkbox"
+                          checked={selectedLayer.output}
+                          onChange={(e) => handleUpdate({ output: e.target.checked })}
+                          style={{ width: '14px', height: '14px', cursor: 'pointer' }}
+                        />
+                        <span style={{ whiteSpace: 'nowrap' }}>📤 {t('layers.output', 'Ausgabe')}</span>
+                      </label>
+                    </div>
                   </div>
 
                   <div className="toolbar-divider" style={{ width: '100%', margin: '8px 0' }} />

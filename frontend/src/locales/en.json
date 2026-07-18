@@ -112,7 +112,11 @@
     "fill": "Fill",
     "line": "Line",
     "layer": "Layer",
-    "settings_for": "SETTINGS FOR"
+    "settings_for": "SETTINGS FOR",
+    "thickness_short": "Thick. (mm)",
+    "speed_short": "Speed",
+    "power_short": "Power %",
+    "passes_short": "Passes"
   },
   "tabs": {
     "control": "Control",

@@ -180,10 +180,10 @@ export const PersistentJobPanel: React.FC = () => {
     <div style={{
       borderTop: '1px solid var(--border-color)',
       backgroundColor: 'var(--bg-panel-header)',
-      padding: '16px',
+      padding: '8px 12px',
       display: 'flex',
       flexDirection: 'column',
-      gap: '12px',
+      gap: '6px',
       boxShadow: '0 -4px 10px rgba(0, 0, 0, 0.05)'
     }}>
       {gcodeEditorData.isOpen && (
@@ -220,13 +220,13 @@ export const PersistentJobPanel: React.FC = () => {
       )}
       
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: '11px', fontWeight: 'bold', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <span style={{ fontSize: '10px', fontWeight: 'bold', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           {t('job.title', { defaultValue: "Auftragssteuerung" })}
         </span>
         <span style={{ 
-          fontSize: '11px', 
+          fontSize: '9px', 
           fontWeight: 'bold', 
-          padding: '2px 6px', 
+          padding: '1px 5px', 
           borderRadius: '3px',
           backgroundColor: streamState === 'Idle' ? 'var(--bg-input)' : streamState === 'Paused' ? 'var(--accent-orange)' : 'var(--accent-green)',
           color: streamState === 'Idle' ? 'var(--text-muted)' : '#ffffff'
@@ -236,77 +236,93 @@ export const PersistentJobPanel: React.FC = () => {
       </div>
 
       {isIdle ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <button 
-            className="btn btn-danger" 
-            style={{ 
-              fontWeight: 'bold', 
-              fontSize: '14px', 
-              padding: '12px', 
-              borderRadius: '6px',
-              backgroundColor: '#ef4444',
-              color: '#ffffff',
-              border: '1px solid #dc2626',
-              boxShadow: '0 4px 12px rgba(239, 68, 68, 0.35)',
-              textShadow: '0 1px 2px rgba(0,0,0,0.2)'
-            }} 
-            onClick={handleStartJob} 
-            disabled={!connState.connected} 
-            title={t('job.tooltip_start')}
-          >
-            🔥 {t('job.start')}
-          </button>
-          <div className="form-row" style={{ gridTemplateColumns: '1fr 1fr' }}>
-            <button className="btn" onClick={handleDownloadGcode} title={t('job.tooltip_export')}>
-              💾 {t('job.export_gcode')}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          {/* Reihe 1: Start & Frame */}
+          <div style={{ display: 'flex', gap: '6px' }}>
+            <button 
+              className="btn btn-danger" 
+              style={{ 
+                flex: 1.8,
+                fontWeight: 'bold', 
+                fontSize: '12px', 
+                padding: '6px 10px', 
+                borderRadius: '4px',
+                backgroundColor: '#ef4444',
+                color: '#ffffff',
+                border: '1px solid #dc2626',
+                boxShadow: '0 2px 6px rgba(239, 68, 68, 0.25)',
+                textShadow: '0 1px 1px rgba(0,0,0,0.1)'
+              }} 
+              onClick={handleStartJob} 
+              disabled={!connState.connected} 
+              title={t('job.tooltip_start')}
+            >
+              🔥 {t('job.start', 'Start')}
             </button>
-            <button className="btn" onClick={handleSimulateJob} title={t('job.tooltip_simulate')}>
-              👁️ {t('job.simulate')}
+            <button 
+              className="btn btn-secondary" 
+              onClick={handleFrame}
+              disabled={!connState.connected}
+              title={t('job.tooltip_frame')}
+              style={{ flex: 1, padding: '6px', borderRadius: '4px', fontSize: '11px' }}
+            >
+              📐 {t('job.frame', 'Rahmen')}
             </button>
-          </div>
-          <button 
-            className="btn btn-secondary" 
-            onClick={handleFrame}
-            disabled={!connState.connected}
-            title={t('job.tooltip_frame')}
-            style={{ width: '100%', padding: '8px', borderRadius: '4px', fontSize: '12px' }}
-          >
-            📐 {t('job.frame')}
-          </button>
-          <button 
-            className="btn btn-secondary" 
-            onClick={() => window.dispatchEvent(new CustomEvent('openModal', { detail: { modal: 'batch' } }))} 
-            title={t('job.tooltip_batch')}
-            style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '8px', borderRadius: '4px', fontSize: '12px' }}
-          >
-            📊 {t('job.batch')}
-          </button>
-        </div>
-      ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <div style={{ fontSize: '11px', color: 'var(--text-muted)' }} className="flex-between">
-            <span>{t('job.progress')}: {progressPercent}%</span>
-            <span style={{ color: 'var(--accent-cyan)' }}>⏱️ {t('job.time_remaining', 'Restzeit')}: {formatTime(remainingSeconds)}</span>
-          </div>
-          <div style={{ width: '100%', height: '8px', backgroundColor: 'var(--bg-input)', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
-            <div style={{ width: `${progressPercent}%`, height: '100%', backgroundColor: 'var(--accent-cyan)', transition: 'width 0.1s ease' }} />
-          </div>
-          <div style={{ fontSize: '10px', color: 'var(--text-muted)', textAlign: 'right', marginTop: '-4px' }}>
-            {sentLines} / {totalLines} {t('job.lines', 'Zeilen')}
           </div>
 
-          <div className="form-row" style={{ gridTemplateColumns: '1fr 1fr' }}>
+          {/* Reihe 2: Export, Simulieren, Serien */}
+          <div style={{ display: 'flex', gap: '4px' }}>
+            <button 
+              className="btn" 
+              onClick={handleDownloadGcode} 
+              title={t('job.tooltip_export')}
+              style={{ flex: 1, padding: '4px 2px', fontSize: '10px', whiteSpace: 'nowrap' }}
+            >
+              💾 {t('job.export_short', 'G-Code')}
+            </button>
+            <button 
+              className="btn" 
+              onClick={handleSimulateJob} 
+              title={t('job.tooltip_simulate')}
+              style={{ flex: 1, padding: '4px 2px', fontSize: '10px', whiteSpace: 'nowrap' }}
+            >
+              👁️ {t('job.simulate_short', 'Vorschau')}
+            </button>
+            <button 
+              className="btn" 
+              onClick={() => window.dispatchEvent(new CustomEvent('openModal', { detail: { modal: 'batch' } }))} 
+              title={t('job.tooltip_batch')}
+              style={{ flex: 1, padding: '4px 2px', fontSize: '10px', whiteSpace: 'nowrap' }}
+            >
+              📊 {t('job.batch_short', 'Serien')}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div style={{ fontSize: '10px', color: 'var(--text-muted)' }} className="flex-between">
+            <span>{t('job.progress')}: {progressPercent}%</span>
+            <span style={{ color: 'var(--accent-cyan)' }}>⏱️ {formatTime(remainingSeconds)}</span>
+          </div>
+          <div style={{ width: '100%', height: '6px', backgroundColor: 'var(--bg-input)', borderRadius: '3px', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
+            <div style={{ width: `${progressPercent}%`, height: '100%', backgroundColor: 'var(--accent-cyan)', transition: 'width 0.1s ease' }} />
+          </div>
+          <div style={{ fontSize: '9px', color: 'var(--text-muted)', textAlign: 'right', marginTop: '-2px' }}>
+            {sentLines}/{totalLines} {t('job.lines', 'Zeilen')}
+          </div>
+
+          <div className="form-row" style={{ gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
             {streamState === 'Streaming' ? (
-              <button className="btn btn-primary" onClick={() => gcodeStreamer.pause()}>
-                ⏸️ {t('job.pause')}
+              <button className="btn btn-primary" onClick={() => gcodeStreamer.pause()} style={{ padding: '4px 8px', fontSize: '11px' }}>
+                ⏸️ {t('job.pause', 'Pause')}
               </button>
             ) : (
-              <button className="btn btn-success" onClick={() => gcodeStreamer.resume()}>
-                ▶️ {t('job.resume')}
+              <button className="btn btn-success" onClick={() => gcodeStreamer.resume()} style={{ padding: '4px 8px', fontSize: '11px' }}>
+                ▶️ {t('job.resume', 'Fortsetzen')}
               </button>
             )}
-            <button className="btn btn-danger" onClick={() => gcodeStreamer.cancel()}>
-              ⏹️ {t('job.cancel')}
+            <button className="btn btn-danger" onClick={() => gcodeStreamer.cancel()} style={{ padding: '4px 8px', fontSize: '11px' }}>
+              ⏹️ {t('job.cancel', 'Abbrechen')}
             </button>
           </div>
         </div>

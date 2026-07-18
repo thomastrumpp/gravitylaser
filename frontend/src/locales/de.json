@@ -125,7 +125,11 @@
     "fill": "Füllen",
     "line": "Linie",
     "layer": "Ebene",
-    "settings_for": "EINSTELLUNGEN FÜR"
+    "settings_for": "EINSTELLUNGEN FÜR",
+    "thickness_short": "Dicke (mm)",
+    "speed_short": "Geschw.",
+    "power_short": "Leist. %",
+    "passes_short": "Durchg."
   },
   "tabs": {
     "control": "Steuerung",
