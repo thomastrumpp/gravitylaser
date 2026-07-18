@@ -449,37 +449,9 @@ export const LaserCanvas: React.FC = () => {
       }
     });
 
-    // Listen for object removal
-    canvas.on('object:removed', (e) => {
-      if (historyStore.isRebuilding) return;
-      const target = e.target;
-      if (!target) return;
-
-      const getIds = (obj: fabric.FabricObject): string[] => {
-        const data = obj.get('data') as any;
-        if (data && data.gravityId) {
-          return [data.gravityId];
-        }
-        return [];
-      };
-
-      let ids: string[] = [];
-      if (target.type === 'activeselection') {
-        (target as fabric.ActiveSelection).forEachObject((obj) => {
-          ids.push(...getIds(obj));
-        });
-      } else {
-        ids.push(...getIds(target));
-      }
-
-      if (ids.length > 0) {
-        historyStore.registerCommand({
-          id: uuidv4(),
-          type: 'delete',
-          params: { targetIds: ids }
-        });
-      }
-    });
+    // NOTE: Delete-Commands werden NICHT über object:removed registriert,
+    // sondern explizit beim Delete-Tastendruck und bei canvasAction-Events,
+    // um doppelte Einträge bei Group/Ungroup/Boolean-Operationen zu vermeiden.
 
     // 4. Mouse Events für Zeichnen & Pan
     canvas.on('mouse:down', (e) => handleMouseDown(e, canvas));
@@ -522,10 +494,18 @@ export const LaserCanvas: React.FC = () => {
         return;
       }
 
-      // Copy & Paste via Ctrl+C / Ctrl+V
+      // Undo/Redo & Copy & Paste via Ctrl+Key
       if (e.ctrlKey || e.metaKey) {
         const lowerKey = e.key.toLowerCase();
-        if (lowerKey === 'c') {
+        if (lowerKey === 'z') {
+          e.preventDefault();
+          historyStore.undo();
+          return;
+        } else if (lowerKey === 'y') {
+          e.preventDefault();
+          historyStore.redo();
+          return;
+        } else if (lowerKey === 'c') {
           if (activeObj) {
             activeObj.clone().then((cloned) => {
               canvasClipboard = cloned;
@@ -674,6 +654,28 @@ export const LaserCanvas: React.FC = () => {
         canvas.requestRenderAll();
       } else if (e.key === 'Delete' || e.key === 'Backspace') {
         if (activeObj) {
+          // Sammle alle gravityIds VOR dem Entfernen
+          const deleteIds: string[] = [];
+          if (activeObj.type.toLowerCase() === 'activeselection') {
+            (activeObj as any).forEachObject((obj: fabric.FabricObject) => {
+              const gid = (obj.get('data') as any)?.gravityId;
+              if (gid) deleteIds.push(gid);
+            });
+          } else {
+            const gid = (activeObj.get('data') as any)?.gravityId;
+            if (gid) deleteIds.push(gid);
+          }
+
+          // History-Eintrag registrieren
+          if (deleteIds.length > 0) {
+            historyStore.registerCommand({
+              id: uuidv4(),
+              type: 'delete',
+              params: { targetIds: deleteIds }
+            });
+          }
+
+          // Objekte entfernen
           if (activeObj.type.toLowerCase() === 'activeselection') {
             (activeObj as any).forEachObject((obj: fabric.FabricObject) => {
               canvas.remove(obj);
@@ -972,12 +974,31 @@ export const LaserCanvas: React.FC = () => {
       const { layerId } = customEvent.detail;
       const activeObj = canvas.getActiveObject();
       if (activeObj) {
+        const data = activeObj.get('data') as any;
+        const oldLayerId = data?.layerId || 'C00';
+        const gravityId = data?.gravityId;
         const layerColor = layersStore.get()[layerId]?.color || '#ffffff';
         const layerMode = layersStore.get()[layerId]?.mode || 'line';
         
         applyLayerColor(activeObj, layerColor, layerMode, layerId);
         
         canvas.requestRenderAll();
+        
+        // History-Eintrag für Layer-Wechsel
+        if (gravityId && oldLayerId !== layerId) {
+          historyStore.registerCommand({
+            id: uuidv4(),
+            type: 'layerChange',
+            description: `Layer: ${oldLayerId} → ${layerId}`,
+            params: {
+              targetIds: [gravityId],
+              oldLayerId,
+              layerId,
+              color: layerColor,
+              mode: layerMode,
+            }
+          });
+        }
         
         // Store aktualisieren, damit UI es sofort merkt
         handleSelection();
@@ -987,11 +1008,61 @@ export const LaserCanvas: React.FC = () => {
 
     // 8. Object Properties Update Listener (vom PropertiesPanel)
     const handleUpdateActiveObject = (e: Event) => {
+      if (historyStore.isRebuilding) return;
       const customEvent = e as CustomEvent;
       const activeObj = canvas.getActiveObject();
       if (activeObj) {
-        const updates = customEvent.detail;
+        const data = activeObj.get('data') as any;
+        const gravityId = data?.gravityId;
+        const updates = { ...customEvent.detail }; // Clone um Original nicht zu verändern
         
+        // Alte Werte erfassen VOR der Änderung
+        const oldProperties: any = {};
+        const newPropertiesForHistory: any = {};
+
+        // Position (mm-Werte)
+        if (updates.x !== undefined) {
+          oldProperties.xMm = getObjectLeftMm(activeObj);
+          newPropertiesForHistory.xMm = updates.x;
+        }
+        if (updates.y !== undefined) {
+          oldProperties.yMm = getObjectBottomMm(activeObj);
+          newPropertiesForHistory.yMm = updates.y;
+        }
+        
+        // Geometrie
+        if (updates.width !== undefined) {
+          oldProperties.scaleX = activeObj.scaleX;
+          newPropertiesForHistory.scaleX = (updates.width * scalePxPerMm) / (activeObj.width || 1);
+        }
+        if (updates.height !== undefined) {
+          oldProperties.scaleY = activeObj.scaleY;
+          newPropertiesForHistory.scaleY = (updates.height * scalePxPerMm) / (activeObj.height || 1);
+        }
+        if (updates.angle !== undefined) {
+          oldProperties.angle = activeObj.angle;
+          newPropertiesForHistory.angle = updates.angle;
+        }
+        if (updates.scaleX !== undefined) {
+          oldProperties.scaleX = activeObj.scaleX;
+          newPropertiesForHistory.scaleX = updates.scaleX;
+        }
+        if (updates.scaleY !== undefined) {
+          oldProperties.scaleY = activeObj.scaleY;
+          newPropertiesForHistory.scaleY = updates.scaleY;
+        }
+
+        // Data-Felder (Image-Filter, Kerf etc.)
+        const dataFields = ['imageMode', 'ditherType', 'brightness', 'contrast', 'gamma', 
+                           'invert', 'thresholdValue', 'overscan', 'kerf', 'kerfMode'];
+        for (const field of dataFields) {
+          if (updates[field] !== undefined) {
+            oldProperties[field] = data?.[field] ?? (activeObj as any)[field];
+            newPropertiesForHistory[field] = updates[field];
+          }
+        }
+        
+        // Jetzt die eigentliche Änderung durchführen
         const currentYMm = getObjectBottomMm(activeObj);
         const newXMm = updates.x;
         const newYMm = updates.y;
@@ -1000,7 +1071,7 @@ export const LaserCanvas: React.FC = () => {
         
         if (updates.width !== undefined) {
            updates.scaleX = (updates.width * scalePxPerMm) / (activeObj.width || 1);
-           delete updates.width; // set() nutzt standardmäßig Skalierung statt Breitenänderung
+           delete updates.width;
         }
         if (updates.height !== undefined) {
            updates.scaleY = (updates.height * scalePxPerMm) / (activeObj.height || 1);
@@ -1009,7 +1080,7 @@ export const LaserCanvas: React.FC = () => {
 
         activeObj.set(updates);
 
-        // Apply positioning (use current Y if Y was not explicitly changed but height was, to keep bottom-left constant)
+        // Apply positioning
         const yToSet = newYMm !== undefined ? newYMm : (updates.height !== undefined ? currentYMm : undefined);
         setObjectPosition(activeObj, newXMm, yToSet);
         if (activeObj.type === 'image') {
@@ -1018,6 +1089,51 @@ export const LaserCanvas: React.FC = () => {
         activeObj.setCoords();
         canvas.requestRenderAll();
         handleSelection();
+
+        // History-Eintrag registrieren
+        if (gravityId && Object.keys(newPropertiesForHistory).length > 0) {
+          // Beschreibung generieren
+          let description = '';
+          const changedKeys = Object.keys(newPropertiesForHistory);
+          if (changedKeys.length === 1) {
+            const key = changedKeys[0];
+            const fieldNames: Record<string, string> = {
+              xMm: 'X', yMm: 'Y', scaleX: 'Scale X', scaleY: 'Scale Y', 
+              angle: '∠', brightness: '☀', contrast: '◐', gamma: 'γ',
+              thresholdValue: 'Threshold', overscan: 'Overscan',
+              kerf: 'Kerf', kerfMode: 'Kerf', imageMode: 'Mode',
+              ditherType: 'Dither', invert: 'Invert'
+            };
+            const name = fieldNames[key] || key;
+            const oldVal = typeof oldProperties[key] === 'number' ? Math.round(oldProperties[key] * 10) / 10 : oldProperties[key];
+            const newVal = typeof newPropertiesForHistory[key] === 'number' ? Math.round(newPropertiesForHistory[key] * 10) / 10 : newPropertiesForHistory[key];
+            description = `${name}: ${oldVal} → ${newVal}`;
+          } else {
+            description = changedKeys.map(k => {
+              const fieldNames: Record<string, string> = { xMm: 'X', yMm: 'Y', scaleX: 'W', scaleY: 'H', angle: '∠' };
+              return fieldNames[k] || k;
+            }).join(', ');
+          }
+
+          historyStore.registerCommand({
+            id: uuidv4(),
+            type: 'propertyChange',
+            description,
+            params: {
+              targetId: gravityId,
+              oldProperties,
+              newProperties: {
+                ...newPropertiesForHistory,
+                // Speichere auch die finalen Canvas-Pixel-Werte für den Replay
+                left: activeObj.left,
+                top: activeObj.top,
+                scaleX: activeObj.scaleX,
+                scaleY: activeObj.scaleY,
+                angle: activeObj.angle,
+              },
+            }
+          });
+        }
       }
     };
     window.addEventListener('updateActiveObject', handleUpdateActiveObject);

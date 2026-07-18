@@ -47,9 +47,11 @@ export class NestingService {
     
     // 1. Konvertiere Canvas-Objekte in NestingItems anhand ihrer echten visuellen Bounding-Box
     const items: NestingItem[] = objects.map(obj => {
-      const br = obj.getBoundingRect(true, true);
+      const br = typeof obj.getBoundingRect === 'function'
+        ? obj.getBoundingRect(true, true)
+        : { width: obj.width, height: obj.height, left: obj.left, top: obj.top };
       return {
-        id: obj.get('data')?.gravityId || obj.id || Math.random().toString(),
+        id: obj.get?.('data')?.gravityId || obj.get?.('data')?.id || obj.id || Math.random().toString(),
         width: br.width,
         height: br.height,
         x: br.left,

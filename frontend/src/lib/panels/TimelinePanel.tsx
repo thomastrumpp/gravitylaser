@@ -17,7 +17,9 @@ import {
   Trash2,
   ChevronRight,
   GitCommit,
-  Scissors
+  Scissors,
+  Settings,
+  Sliders
 } from 'lucide-react';
 
 export const TimelinePanel: React.FC = () => {
@@ -37,26 +39,34 @@ export const TimelinePanel: React.FC = () => {
     switch (cmd.type) {
       case 'create':
         const shape = cmd.params.shapeType;
-        if (shape === 'rect') return { label: 'Rechteck', icon: Square, color: 'var(--accent-cyan)' };
-        if (shape === 'circle') return { label: 'Kreis', icon: Circle, color: 'var(--accent-cyan)' };
-        if (shape === 'text' || shape === 'i-text') return { label: 'Text', icon: Type, color: 'var(--accent-blue)' };
-        return { label: `Form: ${shape}`, icon: HelpCircle, color: 'var(--accent-cyan)' };
+        if (shape === 'rect') return { label: t('timeline.create_rect', 'Rechteck erstellen'), icon: Square, color: 'var(--accent-cyan)' };
+        if (shape === 'circle') return { label: t('timeline.create_circle', 'Kreis erstellen'), icon: Circle, color: 'var(--accent-cyan)' };
+        if (shape === 'text' || shape === 'i-text') return { label: t('timeline.create_text', 'Text erstellen'), icon: Type, color: 'var(--accent-blue)' };
+        return { label: t('timeline.create_shape', 'Form erstellen: {{shape}}', { shape }), icon: HelpCircle, color: 'var(--accent-cyan)' };
       case 'update':
-        return { label: 'Eigenschaften', icon: RotateCcw, color: 'var(--accent-orange)' };
+        return { label: cmd.description || t('timeline.update', 'Eigenschaften ändern'), icon: RotateCcw, color: 'var(--accent-orange)' };
+      case 'propertyChange':
+        return { label: cmd.description || t('timeline.property_change', 'Eigenschaft geändert'), icon: Settings, color: 'var(--accent-orange)' };
       case 'delete':
-        return { label: 'Löschen', icon: Trash2, color: 'var(--accent-red)' };
+        return { label: t('timeline.delete', 'Löschen'), icon: Trash2, color: 'var(--accent-red)' };
       case 'layerChange':
-        return { label: 'Ebene wechseln', icon: Layers, color: 'var(--accent-green)' };
+        return { label: cmd.description || t('timeline.layer_change', 'Ebene wechseln'), icon: Layers, color: 'var(--accent-green)' };
+      case 'layerSettings':
+        return { label: cmd.description || t('timeline.layer_settings', 'Ebeneneinstellungen'), icon: Sliders, color: 'var(--accent-green)' };
+      case 'layerPresetMode':
+        return { label: cmd.description || t('timeline.layer_preset_mode', 'Ebenen-Preset'), icon: Sliders, color: 'var(--accent-green)' };
+      case 'settingsChange':
+        return { label: cmd.description || t('timeline.settings_change', 'Option geändert'), icon: Settings, color: 'var(--text-muted)' };
       case 'group':
-        return { label: 'Gruppieren', icon: Link, color: 'var(--text-muted)' };
+        return { label: t('timeline.group', 'Gruppieren'), icon: Link, color: 'var(--text-muted)' };
       case 'ungroup':
-        return { label: 'Auflösen', icon: Unlink, color: 'var(--text-muted)' };
+        return { label: t('timeline.ungroup', 'Auflösen'), icon: Unlink, color: 'var(--text-muted)' };
       case 'boolean':
-        return { label: `Boolean: ${cmd.params.action}`, icon: Scissors, color: 'var(--accent-orange)' };
+        return { label: t('timeline.boolean', 'Boolean: {{action}}', { action: cmd.params.action }), icon: Scissors, color: 'var(--accent-orange)' };
       case 'align':
-        return { label: 'Ausrichten', icon: ChevronRight, color: 'var(--text-dark)' };
+        return { label: t('timeline.align', 'Ausrichten'), icon: ChevronRight, color: 'var(--text-dark)' };
       default:
-        return { label: 'Aktion', icon: GitCommit, color: 'var(--text-muted)' };
+        return { label: t('timeline.action', 'Aktion'), icon: GitCommit, color: 'var(--text-muted)' };
     }
   };
 

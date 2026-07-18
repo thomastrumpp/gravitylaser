@@ -32,20 +32,13 @@ import { useTranslation } from 'react-i18next';
 export const CanvasToolbar: React.FC = () => {
   const { t } = useTranslation();
   const { activeTool } = useStore(canvasStore);
-  const [lastNav, setLastNav] = React.useState<ToolType>('select');
-  const [isNavOpen, setIsNavOpen] = React.useState(false);
   const [lastShape, setLastShape] = React.useState<ToolType>('rect');
   const [isShapesOpen, setIsShapesOpen] = React.useState(false);
   const [isOpsOpen, setIsOpsOpen] = React.useState(false);
   const [isImportOpen, setIsImportOpen] = React.useState(false);
   const [isAlignOpen, setIsAlignOpen] = React.useState(false);
 
-  // Basis-Werkzeuge (Navigation / Select)
-  const navigationTools = [
-    { id: 'select' as ToolType, label: 'Auswahl', icon: MousePointer, tooltip: 'Auswahlwerkzeug (S)' },
-    { id: 'node-edit' as ToolType, label: 'Knotenbearbeitung', icon: GitCommit, tooltip: 'Knotenbearbeitung (N)' },
-    { id: 'pan' as ToolType, label: 'Bewegen', icon: Hand, tooltip: 'Arbeitsfläche verschieben (P)' },
-  ];
+
 
   // Alle Formen (Rechteck und Kreis oben, gefolgt von weiteren Formen)
   const allShapes = [
@@ -62,9 +55,7 @@ export const CanvasToolbar: React.FC = () => {
   ];
 
   React.useEffect(() => {
-    if (navigationTools.some(t => t.id === activeTool)) {
-      setLastNav(activeTool);
-    } else if (allShapes.some(s => s.id === activeTool)) {
+    if (allShapes.some(s => s.id === activeTool)) {
       setLastShape(activeTool);
     }
   }, [activeTool]);
@@ -199,7 +190,6 @@ export const CanvasToolbar: React.FC = () => {
           className={`tool-button ${isImportOpen ? 'active' : ''}`}
           onClick={() => {
             setIsImportOpen(!isImportOpen);
-            setIsNavOpen(false);
             setIsShapesOpen(false);
             setIsOpsOpen(false);
             setIsAlignOpen(false);
@@ -331,7 +321,6 @@ export const CanvasToolbar: React.FC = () => {
           className={`tool-button ${isOpsOpen ? 'active' : ''}`}
           onClick={() => {
             setIsOpsOpen(!isOpsOpen);
-            setIsNavOpen(false);
             setIsShapesOpen(false);
             setIsImportOpen(false);
             setIsAlignOpen(false);
@@ -411,7 +400,6 @@ export const CanvasToolbar: React.FC = () => {
           className={`tool-button ${isAlignOpen ? 'active' : ''}`}
           onClick={() => {
             setIsAlignOpen(!isAlignOpen);
-            setIsNavOpen(false);
             setIsShapesOpen(false);
             setIsOpsOpen(false);
             setIsImportOpen(false);

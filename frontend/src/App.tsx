@@ -6,7 +6,6 @@ import { uiStore } from './lib/stores/uiStore';
 import { gcodeStreamer } from './lib/gcode/GcodeStreamer';
 import { canvasStore } from './lib/stores/canvasStore';
 import { consoleStore } from './lib/stores/consoleStore';
-import { settingsStore } from './lib/stores/settingsStore';
 import { GcodeProjectService } from './lib/services/GcodeProjectService';
 import { gcodeGen } from './lib/gcode/GcodeGenerator';
 
@@ -25,12 +24,8 @@ import { TimelinePanel } from './lib/panels/TimelinePanel';
 import { BarcodeModal } from './lib/panels/BarcodeModal';
 import { BatchProductionModal } from './lib/panels/BatchProductionModal';
 import { PrintAndCutWizard } from './lib/panels/PrintAndCutWizard';
-import { LensCalibration } from './lib/vision/LensCalibration';
-import { CameraAlignment } from './lib/vision/CameraAlignment';
 import { CameraAlignmentWizard } from './lib/panels/CameraAlignmentWizard';
 import { NestingModal } from './lib/panels/NestingModal';
-import { dockingStore } from './lib/stores/dockingStore';
-import { FloatingPanel } from './lib/ui/FloatingPanel';
 import { MacroPanel } from './lib/panels/MacroPanel';
 import { WebToolImporterModal } from './lib/panels/WebToolImporterModal';
 import { TestsuiteModal } from './lib/panels/TestsuiteModal';
@@ -40,8 +35,6 @@ const App: React.FC = () => {
   const { t } = useTranslation();
   const connState = useStore(connectionStore);
   const { activeSidebarTab, theme } = useStore(uiStore);
-  const dockingState = useStore(dockingStore);
-  const { backgroundMode } = useStore(canvasStore);
   const { isCollapsed: isConsoleCollapsed } = useStore(consoleStore);
 
   // Modal Steuerung
@@ -67,155 +60,7 @@ const App: React.FC = () => {
     canvasStore.setBackgroundMode(newTheme === 'dark' ? 'darkGrid' : 'white');
   };
 
-  const toggleCameraMode = async () => {
-    if (backgroundMode === 'camera') {
-      canvasStore.setBackgroundMode('darkGrid');
-    } else {
-      canvasStore.setBackgroundMode('camera');
-      if (!canvasStore.get().cameraImage) {
-        const settings = settingsStore.get();
-        if (settings.cameraType === 'ip') {
-          if (!settings.cameraIpUrl) {
-            alert("Bitte konfigurieren Sie zuerst die IP-Kamera URL in den Einstellungen.");
-            canvasStore.setBackgroundMode('darkGrid');
-            return;
-          }
-          try {
-            console.log("Lade IP-Kamera Snapshot von URL:", settings.cameraIpUrl);
-            const dataUrl = await new Promise<string>((resolve, reject) => {
-              const img = new Image();
-              img.crossOrigin = 'anonymous';
-              img.onload = () => {
-                const capCanvas = document.createElement('canvas');
-                capCanvas.width = img.width;
-                capCanvas.height = img.height;
-                const capCtx = capCanvas.getContext('2d');
-                if (capCtx) {
-                  capCtx.drawImage(img, 0, 0);
-                  resolve(capCanvas.toDataURL('image/jpeg'));
-                } else {
-                  reject(new Error("Canvas context is null"));
-                }
-              };
-              img.onerror = () => reject(new Error("Fehler beim Laden des IP-Kamera Snapshots. Bitte prüfen Sie die URL und Verbindung."));
-              img.src = settings.cameraIpUrl;
-            });
-            const undistorted = await LensCalibration.undistort(dataUrl, settings.cameraK1 || 0, settings.cameraK2 || 0);
-            let finalDataUrl = undistorted;
-            if (settings.cameraHomography) {
-              const mmToPx = 3;
-              const wPx = settings.workingSizeX * mmToPx;
-              const hPx = settings.workingSizeY * mmToPx;
-              finalDataUrl = await CameraAlignment.warpImage(undistorted, settings.cameraHomography, wPx, hPx);
-            }
-            canvasStore.setCameraImage(finalDataUrl);
-          } catch (err: any) {
-            alert(err.message);
-            canvasStore.setBackgroundMode('darkGrid');
-          }
-          return;
-        }
 
-        try {
-          // 1. Trigger Berechtigungs-Abfrage (falls noch nicht erteilt)
-          const tempStream = await navigator.mediaDevices.getUserMedia({ video: true });
-          tempStream.getTracks().forEach(t => t.stop()); // Direkt wieder schließen
-
-          // 2. Geräte auflisten (Labels sind nun sichtbar)
-          const devices = await navigator.mediaDevices.enumerateDevices();
-          const videoDevices = devices.filter(d => d.kind === 'videoinput');
-
-          let constraints: MediaStreamConstraints = {
-            video: { width: { ideal: 1920 }, height: { ideal: 1080 } }
-          };
-
-          if (videoDevices.length > 1) {
-            // Versuche USB- oder externe Kamera zu finden
-            const usbDevice = videoDevices.find(d => 
-              d.label.toLowerCase().includes('usb') || 
-              d.label.toLowerCase().includes('cam') && 
-              !d.label.toLowerCase().includes('integrated') && 
-              !d.label.toLowerCase().includes('front')
-            ) || videoDevices[videoDevices.length - 1]; // Fallback auf das letzte Gerät in der Liste
-
-            constraints = {
-              video: {
-                deviceId: { exact: usbDevice.deviceId },
-                width: { ideal: 1920 },
-                height: { ideal: 1080 }
-              }
-            };
-            console.log("Nutze USB-Kamera:", usbDevice.label);
-          }
-
-          const stream = await navigator.mediaDevices.getUserMedia(constraints);
-          
-          const video = document.createElement('video');
-          video.autoplay = true;
-          video.playsInline = true;
-          video.muted = true;
-          video.style.position = 'absolute';
-          video.style.left = '-9999px';
-          video.style.top = '-9999px';
-          document.body.appendChild(video);
-
-          // Warte auf echtes Abspielen und Belichtungszeit (ohne Race Conditions)
-          await new Promise<void>((resolve, reject) => {
-            const timeout = setTimeout(() => {
-              cleanup();
-              reject(new Error("Timeout beim Warten auf Videostrom"));
-            }, 6000);
-
-            const cleanup = () => {
-              clearTimeout(timeout);
-              video.onplaying = null;
-              video.onerror = null;
-            };
-
-            video.onplaying = () => {
-              cleanup();
-              setTimeout(resolve, 800);
-            };
-
-            video.onerror = () => {
-              cleanup();
-              reject(new Error("Video-Wiedergabefehler"));
-            };
-
-            video.srcObject = stream;
-            video.play().catch((err) => {
-              cleanup();
-              reject(err);
-            });
-          });
-
-          const captureCanvas = document.createElement('canvas');
-          captureCanvas.width = video.videoWidth || 1280;
-          captureCanvas.height = video.videoHeight || 720;
-          const ctx = captureCanvas.getContext('2d');
-          if (ctx) {
-            ctx.drawImage(video, 0, 0);
-            const dataUrl = captureCanvas.toDataURL('image/png');
-            const undistorted = await LensCalibration.undistort(dataUrl, settings.cameraK1 || 0, settings.cameraK2 || 0);
-            let finalDataUrl = undistorted;
-            if (settings.cameraHomography) {
-              const mmToPx = 3;
-              const wPx = settings.workingSizeX * mmToPx;
-              const hPx = settings.workingSizeY * mmToPx;
-              finalDataUrl = await CameraAlignment.warpImage(undistorted, settings.cameraHomography, wPx, hPx);
-            }
-            canvasStore.setCameraImage(finalDataUrl);
-          }
-          
-          document.body.removeChild(video);
-          stream.getTracks().forEach(track => track.stop());
-        } catch (err) {
-          console.error("Camera fail:", err);
-          alert("Kamera-Aufnahme fehlgeschlagen. Bitte stelle sicher, dass die Kamera eingesteckt ist.");
-        }
-      }
-    }
-  };
 
   // Globaler Hook für den Simulator (wird in MachineControl aufgerufen)
   useEffect(() => {

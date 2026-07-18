@@ -217,7 +217,23 @@
   },
   "timeline": {
     "empty": "Keine Historie vorhanden. Zeichnen Sie eine Form, um die Zeitleiste zu starten.",
-    "start": "Start"
+    "start": "Start",
+    "create_rect": "Rechteck erstellen",
+    "create_circle": "Kreis erstellen",
+    "create_text": "Text erstellen",
+    "create_shape": "Form erstellen: {{shape}}",
+    "update": "Eigenschaften ändern",
+    "property_change": "Eigenschaft geändert",
+    "delete": "Löschen",
+    "layer_change": "Ebene wechseln",
+    "layer_settings": "Ebeneneinstellungen",
+    "layer_preset_mode": "Ebenen-Preset",
+    "settings_change": "Option geändert",
+    "group": "Gruppieren",
+    "ungroup": "Auflösen",
+    "boolean": "Boolean: {{action}}",
+    "align": "Ausrichten",
+    "action": "Aktion"
   },
   "modal_barcode": {
     "title": "Barcode / QR-Code generieren",

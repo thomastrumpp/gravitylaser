@@ -5,7 +5,8 @@ import { canvasStore } from './canvasStore';
 
 export interface Command {
   id: string; // Eindeutige ID der Aktion
-  type: 'create' | 'update' | 'delete' | 'layerChange' | 'group' | 'ungroup' | 'boolean' | 'align';
+  type: 'create' | 'update' | 'delete' | 'layerChange' | 'group' | 'ungroup' | 'boolean' | 'align' | 'propertyChange' | 'layerSettings' | 'layerPresetMode' | 'settingsChange';
+  description?: string; // Menschenlesbare Beschreibung der Aktion (z.B. "Breite: 50 → 80 mm")
   params: any;
 }
 
@@ -376,6 +377,52 @@ class HistoryStore extends Store<HistoryState> {
             obj.setCoords();
           }
         });
+        break;
+      }
+
+      case 'propertyChange': {
+        const { targetId, newProperties } = params;
+        const obj = objectMap.get(targetId);
+        if (obj) {
+          // Geometrie-Eigenschaften direkt setzen
+          const geometryKeys = ['left', 'top', 'width', 'height', 'scaleX', 'scaleY', 'angle', 'strokeWidth'];
+          const geomProps: any = {};
+          const dataProps: any = {};
+
+          for (const [key, value] of Object.entries(newProperties)) {
+            if (geometryKeys.includes(key)) {
+              geomProps[key] = value;
+            } else {
+              dataProps[key] = value;
+            }
+          }
+
+          if (Object.keys(geomProps).length > 0) {
+            obj.set(geomProps);
+          }
+
+          if (Object.keys(dataProps).length > 0) {
+            const currentData = obj.get('data') || {};
+            obj.set('data', { ...currentData, ...dataProps });
+          }
+
+          obj.setCoords();
+        }
+        break;
+      }
+
+      case 'layerSettings': {
+        window.dispatchEvent(new CustomEvent('historyReplayLayerSettings', { detail: params }));
+        break;
+      }
+
+      case 'layerPresetMode': {
+        window.dispatchEvent(new CustomEvent('historyReplayLayerPresetMode', { detail: params }));
+        break;
+      }
+
+      case 'settingsChange': {
+        window.dispatchEvent(new CustomEvent('historyReplaySettings', { detail: params }));
         break;
       }
     }

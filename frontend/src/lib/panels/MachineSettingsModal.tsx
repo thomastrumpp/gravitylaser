@@ -662,7 +662,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                         />
                       </div>
                       <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
-                        <label className="form-label" style={{ fontSize: '10px', title: 'Startet das Relais via M8' }}>{t('materials.airflow', 'Airflow (0-100%)')}</label>
+                        <label className="form-label" style={{ fontSize: '10px' }} title="Startet das Relais via M8">{t('materials.airflow', 'Airflow (0-100%)')}</label>
                         <input 
                           type="number" 
                           className="form-input" 
@@ -698,7 +698,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                         />
                       </div>
                       <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
-                        <label className="form-label" style={{ fontSize: '10px', title: 'Startet das Relais via M8' }}>{t('materials.airflow', 'Airflow (0-100%)')}</label>
+                        <label className="form-label" style={{ fontSize: '10px' }} title="Startet das Relais via M8">{t('materials.airflow', 'Airflow (0-100%)')}</label>
                         <input 
                           type="number" 
                           className="form-input" 

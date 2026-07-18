@@ -60,7 +60,7 @@ export const PersistentJobPanel: React.FC = () => {
           : [{ mode: layerSettings.mode }];
           
         for (const subLayer of subLayers) {
-          if (subLayer.mode === 'cut' || subLayer.mode === 'offset_fill') {
+          if (subLayer.mode === 'line' || subLayer.mode === 'offset_fill') {
              if (mat.cutAirflow && mat.cutAirflow > maxRequiredAirflow) maxRequiredAirflow = mat.cutAirflow;
           } else {
              if (mat.engraveAirflow && mat.engraveAirflow > maxRequiredAirflow) maxRequiredAirflow = mat.engraveAirflow;

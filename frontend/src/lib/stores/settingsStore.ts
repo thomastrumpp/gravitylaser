@@ -1,4 +1,6 @@
 import { Store } from './store';
+import { historyStore } from './historyStore';
+import { v4 as uuidv4 } from 'uuid';
 
 export type OriginPosition = 'BottomLeft' | 'TopLeft' | 'TopRight' | 'BottomRight' | 'Center';
 
@@ -55,9 +57,40 @@ class SettingsStore extends Store<MachineSettings> {
       }
     }
     super(initial);
+
+    // Replay Listener
+    if (typeof window !== 'undefined') {
+      window.addEventListener('historyReplaySettings', (e: any) => {
+        const { field, newValue } = e.detail;
+        this.update((state) => {
+          const newState = { ...state, [field]: newValue };
+          localStorage.setItem('gravitylaser_settings', JSON.stringify(newState));
+          return newState;
+        });
+      });
+    }
   }
 
   public updateSettings(updates: Partial<MachineSettings>) {
+    if (typeof window !== 'undefined' && !historyStore.isRebuilding) {
+      const oldState = this.get();
+      Object.keys(updates).forEach((k) => {
+        const key = k as keyof MachineSettings;
+        if (oldState[key] !== updates[key]) {
+          historyStore.registerCommand({
+            id: uuidv4(),
+            type: 'settingsChange',
+            description: `Option ${key}: ${updates[key]}`,
+            params: {
+              field: key,
+              oldValue: oldState[key],
+              newValue: updates[key]
+            }
+          });
+        }
+      });
+    }
+
     this.update((state) => {
       const newState = { ...state, ...updates };
       localStorage.setItem('gravitylaser_settings', JSON.stringify(newState));

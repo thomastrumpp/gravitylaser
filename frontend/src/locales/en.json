@@ -300,7 +300,23 @@
   },
   "timeline": {
     "empty": "No history available. Draw a shape to start the timeline.",
-    "start": "Start"
+    "start": "Start",
+    "create_rect": "Create Rectangle",
+    "create_circle": "Create Circle",
+    "create_text": "Create Text",
+    "create_shape": "Create Shape: {{shape}}",
+    "update": "Modify Properties",
+    "property_change": "Property Changed",
+    "delete": "Delete",
+    "layer_change": "Change Layer",
+    "layer_settings": "Layer Settings",
+    "layer_preset_mode": "Layer Preset",
+    "settings_change": "Option Changed",
+    "group": "Group",
+    "ungroup": "Ungroup",
+    "boolean": "Boolean: {{action}}",
+    "align": "Align",
+    "action": "Action"
   },
   "modal_barcode": {
     "title": "Generate Barcode / QR-Code",

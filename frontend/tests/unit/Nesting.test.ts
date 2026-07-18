@@ -158,8 +158,8 @@ describe('Nesting / Verschachtelung (REQ-NST-01, REQ-NST-02, REQ-NST-03, REQ-NST
     const dx_orig = 15 - 0;
     const dy_orig = 15 - 0;
 
-    const dx_new = mInner.x - mOuter.x;
-    const dy_new = mInner.y - mOuter.y;
+    const dx_new = (mInner.x - 10 / 2) - (mOuter.x - 40 / 2);
+    const dy_new = (mInner.y - 10 / 2) - (mOuter.y - 40 / 2);
 
     expect(dx_new).toBeCloseTo(dx_orig, 2);
     expect(dy_new).toBeCloseTo(dy_orig, 2);

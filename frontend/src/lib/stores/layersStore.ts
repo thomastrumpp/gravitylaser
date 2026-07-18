@@ -2,6 +2,7 @@ import { Store } from './store';
 import { settingsStore } from './settingsStore';
 import { MATERIALS, calculatePasses, materialsStore, calculateCutPower } from './materialStore';
 import { v4 as uuidv4 } from 'uuid';
+import { historyStore } from './historyStore';
 
 export interface SubLayer {
   id: string;
@@ -57,12 +58,60 @@ class LayersStore extends Store<LayersState> {
       const settings = settingsStore.get();
       this.recalculateAllPresets(settings.selectedMaterialId, settings.materialThickness);
     });
+
+    // Replay Listeners
+    if (typeof window !== 'undefined') {
+      window.addEventListener('historyReplayLayerSettings', (e: any) => {
+        const { layerId, field, newValue } = e.detail;
+        this.update((state) => {
+          if (!state[layerId]) return state;
+          return {
+            ...state,
+            [layerId]: {
+              ...state[layerId],
+              [field]: newValue,
+            },
+          };
+        });
+      });
+
+      window.addEventListener('historyReplayLayerPresetMode', (e: any) => {
+        const { layerId, presetMode } = e.detail;
+        this.setLayerPresetMode(layerId, presetMode);
+      });
+    }
   }
 
   /**
    * Aktualisiert die Einstellungen einer bestimmten Ebene
    */
   public updateLayer(id: string, updates: Partial<LayerSettings>) {
+    if (typeof window !== 'undefined' && !historyStore.isRebuilding) {
+      const oldLayer = this.get()[id];
+      if (oldLayer) {
+        Object.keys(updates).forEach((k) => {
+          const key = k as keyof LayerSettings;
+          if (oldLayer[key] !== updates[key]) {
+            // Vermeide zu große Serialisierungen im Log
+            const oldVal = oldLayer[key];
+            const newVal = updates[key];
+            
+            historyStore.registerCommand({
+              id: uuidv4(),
+              type: 'layerSettings',
+              description: `Ebene ${id}: ${key} = ${newVal}`,
+              params: {
+                layerId: id,
+                field: key,
+                oldValue: oldVal,
+                newValue: newVal
+              }
+            });
+          }
+        });
+      }
+    }
+
     this.update((state) => {
       if (!state[id]) return state;
       return {
@@ -79,6 +128,22 @@ class LayersStore extends Store<LayersState> {
    * Setzt den Preset-Modus einer Ebene und berechnet die Werte neu
    */
   public setLayerPresetMode(id: string, presetMode: 'engrave' | 'cut' | 'manual') {
+    if (typeof window !== 'undefined' && !historyStore.isRebuilding) {
+      const oldPreset = this.get()[id]?.presetMode || 'manual';
+      if (oldPreset !== presetMode) {
+        historyStore.registerCommand({
+          id: uuidv4(),
+          type: 'layerPresetMode',
+          description: `Ebene ${id}: Preset = ${presetMode}`,
+          params: {
+            layerId: id,
+            presetMode,
+            oldPresetMode: oldPreset
+          }
+        });
+      }
+    }
+
     this.update((state) => {
       if (!state[id]) return state;
       
