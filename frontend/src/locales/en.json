@@ -180,7 +180,7 @@
     "power": "Power (0-100%)",
     "cut_airflow": "Air Assist (1-100)",
     "max_depth": "Max Depth/Pass (mm)",
-    "loss_coeff": "Loss Coefficient (e.g. 0.15)",
+    "loss_coeff": "Loss Factor (e.g. 0.15)",
     "save_success": "Material successfully saved!",
     "reset_confirm": "Do you want to reset all materials to default values? Your own changes will be lost.",
     "notes": "Notes / Details",

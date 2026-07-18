@@ -201,7 +201,7 @@
     "power": "Leistung (0-100%)",
     "cut_airflow": "Air Assist (1-100)",
     "max_depth": "Max. Tiefe/Durchgang (mm)",
-    "loss_coeff": "Energieverlust-Koeffizient (z.B. 0.15)",
+    "loss_coeff": "Verlustfaktor (z.B. 0.15)",
     "notes": "Hinweise / Besonderheiten",
     "new": "➕ Neues Material",
     "reset": "🔄 Zurücksetzen",
