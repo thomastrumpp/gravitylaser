@@ -498,14 +498,14 @@ const App: React.FC = () => {
         {/* Neue Top-Toolbar für Aktionen */}
         <TopToolbar />
 
-        <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+        <div style={{ display: 'flex', flex: 1, overflow: 'hidden', height: '0', minHeight: 0 }}>
           {/* Linke Werkzeugpalette */}
           <div style={{ flex: '0 0 56px', backgroundColor: 'var(--bg-panel)' }}>
              <CanvasToolbar />
           </div>
 
           {/* Mittlere Spalte (Canvas, Timeline und Konsole) */}
-          <div className={`center-panel ${isConsoleCollapsed ? 'console-collapsed' : ''}`} style={{ flex: 1, overflow: 'hidden' }}>
+          <div className={`center-panel ${isConsoleCollapsed ? 'console-collapsed' : ''}`} style={{ flex: 1, overflow: 'hidden', height: '100%', minHeight: 0 }}>
             <LaserCanvas />
             <TimelinePanel />
             <Console />
