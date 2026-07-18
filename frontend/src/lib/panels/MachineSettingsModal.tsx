@@ -209,7 +209,8 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
       <div 
         className="modal-content" 
         style={{ 
-          width: '940px', 
+          width: '1150px', 
+          maxWidth: '95vw',
           transition: 'width 0.2s ease',
           display: 'flex',
           flexDirection: 'column'
