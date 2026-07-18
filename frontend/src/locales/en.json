@@ -609,8 +609,8 @@
     "home": "Home",
     "unlock": "Unlock",
     "set_zero": "Set Zero",
-    "fire_laser": "Fire Laser",
-    "fire_laser_off": "Laser Off",
+    "fire_laser": "Laser Dot On",
+    "fire_laser_off": "Laser Dot Off",
     "go_origin": "Go to Zero",
     "tooltip_x_neg": "Jog X-",
     "tooltip_x_pos": "Jog X+",
@@ -619,7 +619,7 @@
     "tooltip_home": "Home Machine",
     "tooltip_unlock": "Unlock Alarm ($X)",
     "tooltip_set_zero": "Set current position as zero",
-    "tooltip_fire_laser": "Fire laser (M3)"
+    "tooltip_fire_laser": "Turn on laser dot at 1% power for positioning"
   },
   "layers": {
     "title": "Layers",

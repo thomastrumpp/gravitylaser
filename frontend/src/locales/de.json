@@ -520,8 +520,8 @@
     "home": "Home",
     "unlock": "Entsperren",
     "set_zero": "Nullpunkt",
-    "fire_laser": "Laser Start",
-    "fire_laser_off": "Laser Aus",
+    "fire_laser": "Laserpunkt an",
+    "fire_laser_off": "Laserpunkt aus",
     "go_origin": "Zum Nullpunkt",
     "tooltip_x_neg": "X-",
     "tooltip_x_pos": "X+",
@@ -530,7 +530,7 @@
     "tooltip_home": "Maschine referenzieren (Homing)",
     "tooltip_unlock": "Alarm entsperren ($X)",
     "tooltip_set_zero": "Aktuelle Position als Nullpunkt setzen",
-    "tooltip_fire_laser": "Laser testweise anschalten (M3)"
+    "tooltip_fire_laser": "Laserpunkt zur Positionierung einschalten (1% Leistung)"
   },
   "layers": {
     "title": "Ebenen",
