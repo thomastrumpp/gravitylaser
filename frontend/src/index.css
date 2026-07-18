@@ -684,7 +684,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   width: 500px;
-  max-width: 90vw;
+  max-width: 95vw;
   box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;

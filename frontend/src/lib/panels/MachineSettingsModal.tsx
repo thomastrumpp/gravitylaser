@@ -209,7 +209,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
       <div 
         className="modal-content" 
         style={{ 
-          width: '1150px', 
+          width: '1250px', 
           maxWidth: '95vw',
           transition: 'width 0.2s ease',
           display: 'flex',
@@ -642,7 +642,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                   <div style={{ border: '1px solid var(--border-color)', borderRadius: '6px', padding: '8px 10px', backgroundColor: 'var(--bg-input)' }}>
                     <h4 style={{ margin: '0 0 8px 0', fontSize: '12px', color: '#30d158' }}>{t('materials.engrave_preset', '🪵 Gravieren (Ebene 0 Voreinstellung)')}</h4>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                      <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
+                      <div className="form-group" style={{ flex: 1, minWidth: '140px', margin: 0 }}>
                         <label className="form-label" style={{ fontSize: '10px' }}>{t('materials.speed', 'Geschw. (mm/min)')}</label>
                         <input 
                           type="number" 
@@ -652,7 +652,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                           style={{ padding: '6px' }}
                         />
                       </div>
-                      <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
+                      <div className="form-group" style={{ flex: 1, minWidth: '140px', margin: 0 }}>
                         <label className="form-label" style={{ fontSize: '10px' }}>{t('materials.power', 'Leistung (0-100%)')}</label>
                         <input 
                           type="number" 
@@ -662,7 +662,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                           style={{ padding: '6px' }}
                         />
                       </div>
-                      <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
+                      <div className="form-group" style={{ flex: 1, minWidth: '140px', margin: 0 }}>
                         <label className="form-label" style={{ fontSize: '10px' }} title="Startet das Relais via M8">{t('materials.airflow', 'Airflow (0-100%)')}</label>
                         <input 
                           type="number" 
@@ -678,7 +678,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                   <div style={{ border: '1px solid var(--border-color)', borderRadius: '6px', padding: '8px 10px', backgroundColor: 'var(--bg-input)' }}>
                     <h4 style={{ margin: '0 0 8px 0', fontSize: '12px', color: '#ff453a' }}>{t('materials.cut_preset', '✂️ Schneiden (Ebene 1 Voreinstellung)')}</h4>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                      <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
+                      <div className="form-group" style={{ flex: 1, minWidth: '140px', margin: 0 }}>
                         <label className="form-label" style={{ fontSize: '10px' }}>{t('materials.speed', 'Geschw. (mm/min)')}</label>
                         <input 
                           type="number" 
@@ -688,7 +688,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                           style={{ padding: '6px' }}
                         />
                       </div>
-                      <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
+                      <div className="form-group" style={{ flex: 1, minWidth: '140px', margin: 0 }}>
                         <label className="form-label" style={{ fontSize: '10px' }}>{t('materials.power', 'Leistung (0-100%)')}</label>
                         <input 
                           type="number" 
@@ -698,7 +698,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                           style={{ padding: '6px' }}
                         />
                       </div>
-                      <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
+                      <div className="form-group" style={{ flex: 1, minWidth: '140px', margin: 0 }}>
                         <label className="form-label" style={{ fontSize: '10px' }} title="Startet das Relais via M8">{t('materials.airflow', 'Airflow (0-100%)')}</label>
                         <input 
                           type="number" 
@@ -708,7 +708,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                           style={{ padding: '6px' }}
                         />
                       </div>
-                      <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
+                      <div className="form-group" style={{ flex: 1, minWidth: '140px', margin: 0 }}>
                         <label className="form-label" style={{ fontSize: '10px' }}>{t('materials.max_depth', 'Max. Tiefe/Durchg. (mm)')}</label>
                         <input 
                           type="number" 
@@ -719,7 +719,7 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                           style={{ padding: '6px' }}
                         />
                       </div>
-                      <div className="form-group" style={{ flex: 1, minWidth: '100px', margin: 0 }}>
+                      <div className="form-group" style={{ flex: 1, minWidth: '140px', margin: 0 }}>
                         <label className="form-label" style={{ fontSize: '10px' }}>{t('materials.loss_coeff', 'Dämpfung (Verlustfaktor)')}</label>
                         <input 
                           type="number" 
