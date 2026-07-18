@@ -4,7 +4,7 @@
 set -e
 
 # Clear screen
-clear
+clear || true
 echo "====================================================="
 echo "        🚀 GRAVITY LASER START-SCRIPT 🚀             "
 echo "====================================================="

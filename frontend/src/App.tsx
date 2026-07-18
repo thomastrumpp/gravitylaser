@@ -8,6 +8,7 @@ import { canvasStore } from './lib/stores/canvasStore';
 import { consoleStore } from './lib/stores/consoleStore';
 import { GcodeProjectService } from './lib/services/GcodeProjectService';
 import { gcodeGen } from './lib/gcode/GcodeGenerator';
+import { PrintAndCutService } from './lib/services/PrintAndCutService';
 
 // Importiere Komponenten
 import { CanvasToolbar } from './lib/canvas/CanvasToolbar';
@@ -433,6 +434,9 @@ const App: React.FC = () => {
                   <button className="dropdown-item" onClick={() => { setIsSettingsMenuOpen(false); setActiveSettingsTab('kamera'); setIsSettingsOpen(true); }}>
                     📸 {t('nav.settings_camera', 'Kamera')}
                   </button>
+                  <button className="dropdown-item" onClick={() => { setIsSettingsMenuOpen(false); setIsPrintCutOpen(true); }}>
+                    🎯 {t('nav.print_cut', 'Print & Cut')}
+                  </button>
                   <div style={{ height: '1px', backgroundColor: 'var(--border-color)', margin: '4px 0' }} />
                   <button className="dropdown-item" onClick={() => { setIsSettingsMenuOpen(false); setIsTestsuiteOpen(true); }}>
                     🧪 {t('nav.testsuite')}
@@ -441,16 +445,27 @@ const App: React.FC = () => {
               )}
             </div>
 
-            <div style={{ display: 'flex', gap: '4px', marginLeft: '12px' }}>
-              <button 
-                className="btn" 
-                onClick={() => setIsPrintCutOpen(true)} 
-                title={t('nav.tooltip_print_cut', { defaultValue: 'Print & Cut Ausrichtungsassistenten öffnen' })}
-                style={{ height: '28px', padding: '0 8px', fontSize: '12px' }}
+            {PrintAndCutService.isEnabled() && (
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '4px', 
+                  marginLeft: '12px', 
+                  padding: '2px 8px', 
+                  borderRadius: '12px', 
+                  backgroundColor: 'rgba(52, 199, 89, 0.15)', 
+                  border: '1px solid var(--accent-green)', 
+                  color: 'var(--accent-green)',
+                  fontSize: '11px',
+                  fontWeight: 'bold',
+                  height: '24px'
+                }}
+                title={t('nav.tooltip_print_cut_active', { defaultValue: 'Print & Cut Registrierung ist aktiv. G-Code Koordinaten werden automatisch transformiert.' })}
               >
-                🎯 {t('nav.print_cut')}
-              </button>
-            </div>
+                🎯 Print & Cut {t('common.active', 'Aktiv')}
+              </div>
+            )}
           </div>
         </div>
 
