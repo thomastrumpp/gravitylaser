@@ -45,6 +45,53 @@ export const MachineControl: React.FC = () => {
     machineStore.jog(axis, distance, feedRate);
   };
 
+  const handleJogDiag = (dirX: 1 | -1, dirY: 1 | -1) => {
+    if (!connState.connected) return;
+    let distX = stepSize * dirX;
+    let distY = stepSize * dirY;
+
+    const settings = settingsStore.get();
+    const origin = settings.origin;
+
+    // Limit X
+    let minLimitX = 0;
+    let maxLimitX = settings.workingSizeX;
+    if (origin === 'Center') {
+      minLimitX = -settings.workingSizeX / 2;
+      maxLimitX = settings.workingSizeX / 2;
+    }
+    const currentX = machineState.wpos.x;
+    if (dirX === -1 && currentX + distX < minLimitX) {
+      distX = minLimitX - currentX;
+    } else if (dirX === 1 && currentX + distX > maxLimitX) {
+      distX = maxLimitX - currentX;
+    }
+
+    // Limit Y
+    let minLimitY = 0;
+    let maxLimitY = settings.workingSizeY;
+    if (origin === 'Center') {
+      minLimitY = -settings.workingSizeY / 2;
+      maxLimitY = settings.workingSizeY / 2;
+    }
+    const currentY = machineState.wpos.y;
+    if (dirY === -1 && currentY + distY < minLimitY) {
+      distY = minLimitY - currentY;
+    } else if (dirY === 1 && currentY + distY > maxLimitY) {
+      distY = maxLimitY - currentY;
+    }
+
+    if (Math.abs(distX) < 0.001 && Math.abs(distY) < 0.001) return;
+
+    let moveParts = '';
+    if (Math.abs(distX) >= 0.001) moveParts += `X${distX.toFixed(3)}`;
+    if (Math.abs(distY) >= 0.001) moveParts += `Y${distY.toFixed(3)}`;
+
+    if (moveParts) {
+      machineStore.sendCommand(`$J=G91 G21 ${moveParts} F${feedRate}`);
+    }
+  };
+
   return (
     <div style={{ display: 'flex', flex: '1', flexDirection: 'column' }}>
       <div className="section-content" style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '12px' }}>
@@ -54,17 +101,17 @@ export const MachineControl: React.FC = () => {
         {/* Steuerkreuz (Jogging) */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '8px 0' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 44px)', gridTemplateRows: 'repeat(3, 44px)', gap: '8px' }}>
-            <div />
+            <button className="btn" onClick={() => handleJogDiag(-1, 1)} disabled={!connState.connected} title={t('control.tooltip_diagonal_tl', 'Diagonal links oben')}>↖</button>
             <button className="btn" onClick={() => handleJog('Y', 1)} disabled={!connState.connected} title={t('control.tooltip_y_pos')}>▲</button>
-            <div />
+            <button className="btn" onClick={() => handleJogDiag(1, 1)} disabled={!connState.connected} title={t('control.tooltip_diagonal_tr', 'Diagonal rechts oben')}>↗</button>
             
             <button className="btn" onClick={() => handleJog('X', -1)} disabled={!connState.connected} title={t('control.tooltip_x_neg')}>◀</button>
             <button className="btn btn-cyan" onClick={() => machineStore.moveTo(0, 0, 6000)} disabled={!connState.connected} title={t('control.go_origin')}>⌂</button>
             <button className="btn" onClick={() => handleJog('X', 1)} disabled={!connState.connected} title={t('control.tooltip_x_pos')}>▶</button>
             
-            <div />
+            <button className="btn" onClick={() => handleJogDiag(-1, -1)} disabled={!connState.connected} title={t('control.tooltip_diagonal_bl', 'Diagonal links unten')}>↙</button>
             <button className="btn" onClick={() => handleJog('Y', -1)} disabled={!connState.connected} title={t('control.tooltip_y_neg')}>▼</button>
-            <div />
+            <button className="btn" onClick={() => handleJogDiag(1, -1)} disabled={!connState.connected} title={t('control.tooltip_diagonal_br', 'Diagonal rechts unten')}>↘</button>
           </div>
         </div>
 
