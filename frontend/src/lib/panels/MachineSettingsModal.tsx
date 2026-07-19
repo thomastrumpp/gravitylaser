@@ -54,18 +54,6 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
   const [localLossCoeff, setLocalLossCoeff] = useState('');
   const [localNotes, setLocalNotes] = useState('');
 
-  // Initialisiere Materialien
-  useEffect(() => {
-    const matKeys = Object.keys(materials);
-    if (!selectedMatId && matKeys.length > 0) {
-      setSelectedMatId(matKeys[0]);
-      loadLocalFields(materials[matKeys[0]]);
-    } else if (selectedMatId && materials[selectedMatId]) {
-      // Wenn das aktuell ausgewählte Material sich geändert hat (z. B. durch Reset)
-      loadLocalFields(materials[selectedMatId]);
-    }
-  }, [materials, selectedMatId]);
-
   const loadLocalFields = (mat: MaterialPreset) => {
     setLocalMatName(mat.name);
     setLocalEngraveSpeed(mat.engraveSpeed.toString());
@@ -78,6 +66,21 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
     setLocalLossCoeff(mat.lossCoeff.toString());
     setLocalNotes(mat.notes);
   };
+
+  // Initialisiere Materialien
+  useEffect(() => {
+    const matKeys = Object.keys(materials);
+    if (!selectedMatId && matKeys.length > 0) {
+      setTimeout(() => {
+        setSelectedMatId(matKeys[0]);
+        loadLocalFields(materials[matKeys[0]]);
+      }, 0);
+    } else if (selectedMatId && materials[selectedMatId]) {
+      // Wenn das aktuell ausgewählte Material sich geändert hat (z. B. durch Reset)
+      loadLocalFields(materials[selectedMatId]);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [materials, selectedMatId]);
 
   const handleSelectMaterial = (id: string) => {
     setSelectedMatId(id);
