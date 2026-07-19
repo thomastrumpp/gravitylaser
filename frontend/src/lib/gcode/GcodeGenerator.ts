@@ -1085,7 +1085,7 @@ export class GcodeGenerator {
       lines.push(`G0 X${xAccel.toFixed(3)} Y${yMach.toFixed(3)}`);
 
       // 2. Lead-In Bewegung um auf Geschwindigkeit zu kommen (Laser aus / S0)
-      lines.push(`G1 X${xStartMach.toFixed(3)} S0 F${speed}`);
+      lines.push(`G1 X${xStartMach.toFixed(3)} Y${yMach.toFixed(3)} S0 F${speed}`);
 
       // 4. Zeilen-Raster abfahren (Optimiert: Fasst gleiche Pixel zusammen)
       let currentPowerS = -1;
@@ -1104,8 +1104,8 @@ export class GcodeGenerator {
         // Wenn sich die Laser-Leistung ändert, fahre mit der ALTEN Leistung bis zum Beginn dieses neuen Pixels
         if (powerS !== currentPowerS) {
           if (currentPowerS !== -1) {
-            const xPixel = this.mapX(rLeft + c * interval);
-            lines.push(`G1 X${xPixel.toFixed(3)} S${currentPowerS}`);
+            const ptPixel = this.mapXY(rLeft + c * interval, rTop + r * interval);
+            lines.push(`G1 X${ptPixel.x.toFixed(3)} Y${ptPixel.y.toFixed(3)} S${currentPowerS}`);
           }
           currentPowerS = powerS;
         }
@@ -1115,12 +1115,12 @@ export class GcodeGenerator {
       if (currentPowerS !== -1) {
         const lastC = colIndices[colIndices.length - 1];
         const nextC = isLeftToRight ? lastC + 1 : lastC - 1;
-        const xPixelEnd = this.mapX(rLeft + nextC * interval);
-        lines.push(`G1 X${xPixelEnd.toFixed(3)} S${currentPowerS}`);
+        const ptPixelEnd = this.mapXY(rLeft + nextC * interval, rTop + r * interval);
+        lines.push(`G1 X${ptPixelEnd.x.toFixed(3)} Y${ptPixelEnd.y.toFixed(3)} S${currentPowerS}`);
       }
 
       // 5. Lead-Out Bewegung (Laser aus / S0) bis zum Ende des Overscans
-      lines.push(`G1 X${xDecel.toFixed(3)} S0`);
+      lines.push(`G1 X${xDecel.toFixed(3)} Y${yMach.toFixed(3)} S0`);
     }
     lines.push(`M5 ; Laser ausschalten nach Raster`);
     lines.push(`; --- Ende Raster Image scan ---`);
