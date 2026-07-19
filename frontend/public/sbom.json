@@ -1,0 +1,1118 @@
+{
+  "version": "0.0.0",
+  "name": "frontend",
+  "problems": [
+    "extraneous: @babel/plugin-proposal-decorators@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-proposal-decorators",
+    "extraneous: @babel/plugin-syntax-decorators@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-syntax-decorators",
+    "extraneous: @babel/plugin-syntax-jsx@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-syntax-jsx",
+    "extraneous: @babel/plugin-syntax-typescript@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-syntax-typescript",
+    "extraneous: @babel/plugin-transform-typescript@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-transform-typescript",
+    "extraneous: @babel/preset-typescript@7.28.5 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/preset-typescript",
+    "extraneous: @inquirer/ansi@2.0.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/ansi",
+    "extraneous: @inquirer/checkbox@5.2.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/checkbox",
+    "extraneous: @inquirer/confirm@6.1.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/confirm",
+    "extraneous: @inquirer/core@11.2.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/core",
+    "extraneous: @inquirer/editor@5.2.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/editor",
+    "extraneous: @inquirer/expand@5.1.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/expand",
+    "extraneous: @inquirer/external-editor@3.0.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/external-editor",
+    "extraneous: @inquirer/figures@2.0.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/figures",
+    "extraneous: @inquirer/input@5.1.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/input",
+    "extraneous: @inquirer/number@4.1.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/number",
+    "extraneous: @inquirer/password@5.1.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/password",
+    "extraneous: @inquirer/prompts@8.5.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/prompts",
+    "extraneous: @inquirer/rawlist@5.3.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/rawlist",
+    "extraneous: @inquirer/search@4.2.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/search",
+    "extraneous: @inquirer/select@5.2.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/select",
+    "extraneous: @inquirer/type@4.0.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/type",
+    "extraneous: @sec-ant/readable-stream@0.4.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@sec-ant/readable-stream",
+    "extraneous: @sindresorhus/merge-streams@4.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@sindresorhus/merge-streams",
+    "extraneous: @stryker-mutator/api@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/api",
+    "extraneous: @stryker-mutator/core@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/core",
+    "extraneous: @stryker-mutator/instrumenter@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/instrumenter",
+    "extraneous: @stryker-mutator/util@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/util",
+    "extraneous: @stryker-mutator/vitest-runner@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/vitest-runner",
+    "extraneous: @types/react-window@1.8.8 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@types/react-window",
+    "extraneous: angular-html-parser@10.4.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/angular-html-parser",
+    "extraneous: ansi-escapes@7.3.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/ansi-escapes",
+    "extraneous: chalk@5.6.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/chalk",
+    "extraneous: chardet@2.2.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/chardet",
+    "extraneous: cli-cursor@5.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/cli-cursor",
+    "extraneous: cli-truncate@5.2.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/cli-truncate",
+    "extraneous: cli-width@4.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/cli-width",
+    "extraneous: colorette@2.0.20 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/colorette",
+    "extraneous: des.js@1.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/des.js",
+    "extraneous: diff-match-patch@1.0.5 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/diff-match-patch",
+    "extraneous: emoji-regex@10.6.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/emoji-regex",
+    "extraneous: environment@1.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/environment",
+    "extraneous: eventemitter3@5.0.4 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/eventemitter3",
+    "extraneous: execa@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/execa",
+    "extraneous: fast-string-truncated-width@3.0.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/fast-string-truncated-width",
+    "extraneous: fast-string-width@3.0.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/fast-string-width",
+    "extraneous: fast-wrap-ansi@0.2.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/fast-wrap-ansi",
+    "extraneous: figures@6.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/figures",
+    "extraneous: get-east-asian-width@1.6.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/get-east-asian-width",
+    "extraneous: get-stream@9.0.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/get-stream",
+    "extraneous: human-signals@8.0.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/human-signals",
+    "extraneous: husky@9.1.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/husky",
+    "extraneous: is-fullwidth-code-point@5.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/is-fullwidth-code-point",
+    "extraneous: is-plain-obj@4.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/is-plain-obj",
+    "extraneous: is-unicode-supported@2.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/is-unicode-supported",
+    "extraneous: js-md4@0.3.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/js-md4",
+    "extraneous: json-rpc-2.0@1.7.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/json-rpc-2.0",
+    "extraneous: lint-staged@16.4.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/lint-staged",
+    "extraneous: listr2@9.0.5 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/listr2",
+    "extraneous: lodash.groupby@4.6.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/lodash.groupby",
+    "extraneous: log-update@6.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/log-update",
+    "extraneous: mimic-function@5.0.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mimic-function",
+    "extraneous: minimalistic-assert@1.0.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/minimalistic-assert",
+    "extraneous: mutation-server-protocol@0.4.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mutation-server-protocol",
+    "extraneous: mutation-testing-elements@3.7.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mutation-testing-elements",
+    "extraneous: mutation-testing-metrics@3.7.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mutation-testing-metrics",
+    "extraneous: mutation-testing-report-schema@3.7.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mutation-testing-report-schema",
+    "extraneous: mute-stream@3.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mute-stream",
+    "extraneous: npm-run-path@6.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/npm-run-path",
+    "extraneous: onetime@7.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/onetime",
+    "extraneous: parse-ms@4.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/parse-ms",
+    "extraneous: pretty-ms@9.3.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/pretty-ms",
+    "extraneous: progress@2.0.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/progress",
+    "extraneous: qs@6.15.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/qs",
+    "extraneous: react-window@2.2.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/react-window",
+    "extraneous: restore-cursor@5.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/restore-cursor",
+    "extraneous: rfdc@1.4.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/rfdc",
+    "extraneous: rxjs@7.8.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/rxjs",
+    "extraneous: slice-ansi@8.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/slice-ansi",
+    "extraneous: string-argv@0.3.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/string-argv",
+    "extraneous: string-width@8.2.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/string-width",
+    "extraneous: strip-ansi@7.2.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/strip-ansi",
+    "extraneous: strip-final-newline@4.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/strip-final-newline",
+    "extraneous: tree-kill@1.2.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/tree-kill",
+    "extraneous: tslib@2.8.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/tslib",
+    "extraneous: tunnel@0.0.6 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/tunnel",
+    "extraneous: typed-inject@5.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/typed-inject",
+    "extraneous: typed-rest-client@2.3.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/typed-rest-client",
+    "extraneous: underscore@1.13.8 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/underscore",
+    "extraneous: unicorn-magic@0.3.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/unicorn-magic",
+    "extraneous: weapon-regex@1.3.6 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/weapon-regex",
+    "extraneous: wrap-ansi@9.0.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/wrap-ansi",
+    "extraneous: yoctocolors@2.1.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/yoctocolors"
+  ],
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": {
+      "version": "7.29.7",
+      "resolved": "https://registry.npmjs.org/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.29.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @babel/plugin-proposal-decorators@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-proposal-decorators"
+      ]
+    },
+    "@babel/plugin-syntax-decorators": {
+      "version": "7.29.7",
+      "resolved": "https://registry.npmjs.org/@babel/plugin-syntax-decorators/-/plugin-syntax-decorators-7.29.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @babel/plugin-syntax-decorators@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-syntax-decorators"
+      ]
+    },
+    "@babel/plugin-syntax-jsx": {
+      "version": "7.29.7",
+      "resolved": "https://registry.npmjs.org/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.29.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @babel/plugin-syntax-jsx@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-syntax-jsx"
+      ]
+    },
+    "@babel/plugin-syntax-typescript": {
+      "version": "7.29.7",
+      "resolved": "https://registry.npmjs.org/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.29.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @babel/plugin-syntax-typescript@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-syntax-typescript"
+      ]
+    },
+    "@babel/plugin-transform-typescript": {
+      "version": "7.29.7",
+      "resolved": "https://registry.npmjs.org/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.29.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @babel/plugin-transform-typescript@7.29.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/plugin-transform-typescript"
+      ]
+    },
+    "@babel/preset-typescript": {
+      "version": "7.28.5",
+      "resolved": "https://registry.npmjs.org/@babel/preset-typescript/-/preset-typescript-7.28.5.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @babel/preset-typescript@7.28.5 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@babel/preset-typescript"
+      ]
+    },
+    "@eslint/js": {
+      "version": "10.0.1",
+      "resolved": "https://registry.npmjs.org/@eslint/js/-/js-10.0.1.tgz",
+      "overridden": false
+    },
+    "@inquirer/ansi": {
+      "version": "2.0.7",
+      "resolved": "https://registry.npmjs.org/@inquirer/ansi/-/ansi-2.0.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/ansi@2.0.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/ansi"
+      ]
+    },
+    "@inquirer/checkbox": {
+      "version": "5.2.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/checkbox/-/checkbox-5.2.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/checkbox@5.2.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/checkbox"
+      ]
+    },
+    "@inquirer/confirm": {
+      "version": "6.1.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/confirm/-/confirm-6.1.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/confirm@6.1.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/confirm"
+      ]
+    },
+    "@inquirer/core": {
+      "version": "11.2.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/core/-/core-11.2.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/core@11.2.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/core"
+      ]
+    },
+    "@inquirer/editor": {
+      "version": "5.2.2",
+      "resolved": "https://registry.npmjs.org/@inquirer/editor/-/editor-5.2.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/editor@5.2.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/editor"
+      ]
+    },
+    "@inquirer/expand": {
+      "version": "5.1.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/expand/-/expand-5.1.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/expand@5.1.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/expand"
+      ]
+    },
+    "@inquirer/external-editor": {
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/@inquirer/external-editor/-/external-editor-3.0.3.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/external-editor@3.0.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/external-editor"
+      ]
+    },
+    "@inquirer/figures": {
+      "version": "2.0.7",
+      "resolved": "https://registry.npmjs.org/@inquirer/figures/-/figures-2.0.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/figures@2.0.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/figures"
+      ]
+    },
+    "@inquirer/input": {
+      "version": "5.1.2",
+      "resolved": "https://registry.npmjs.org/@inquirer/input/-/input-5.1.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/input@5.1.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/input"
+      ]
+    },
+    "@inquirer/number": {
+      "version": "4.1.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/number/-/number-4.1.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/number@4.1.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/number"
+      ]
+    },
+    "@inquirer/password": {
+      "version": "5.1.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/password/-/password-5.1.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/password@5.1.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/password"
+      ]
+    },
+    "@inquirer/prompts": {
+      "version": "8.5.2",
+      "resolved": "https://registry.npmjs.org/@inquirer/prompts/-/prompts-8.5.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/prompts@8.5.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/prompts"
+      ]
+    },
+    "@inquirer/rawlist": {
+      "version": "5.3.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/rawlist/-/rawlist-5.3.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/rawlist@5.3.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/rawlist"
+      ]
+    },
+    "@inquirer/search": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/search/-/search-4.2.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/search@4.2.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/search"
+      ]
+    },
+    "@inquirer/select": {
+      "version": "5.2.1",
+      "resolved": "https://registry.npmjs.org/@inquirer/select/-/select-5.2.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/select@5.2.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/select"
+      ]
+    },
+    "@inquirer/type": {
+      "version": "4.0.7",
+      "resolved": "https://registry.npmjs.org/@inquirer/type/-/type-4.0.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @inquirer/type@4.0.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@inquirer/type"
+      ]
+    },
+    "@playwright/test": {
+      "version": "1.61.0",
+      "resolved": "https://registry.npmjs.org/@playwright/test/-/test-1.61.0.tgz",
+      "overridden": false
+    },
+    "@sec-ant/readable-stream": {
+      "version": "0.4.1",
+      "resolved": "https://registry.npmjs.org/@sec-ant/readable-stream/-/readable-stream-0.4.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @sec-ant/readable-stream@0.4.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@sec-ant/readable-stream"
+      ]
+    },
+    "@sindresorhus/merge-streams": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/@sindresorhus/merge-streams/-/merge-streams-4.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @sindresorhus/merge-streams@4.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@sindresorhus/merge-streams"
+      ]
+    },
+    "@stryker-mutator/api": {
+      "version": "9.6.1",
+      "resolved": "https://registry.npmjs.org/@stryker-mutator/api/-/api-9.6.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @stryker-mutator/api@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/api"
+      ]
+    },
+    "@stryker-mutator/core": {
+      "version": "9.6.1",
+      "resolved": "https://registry.npmjs.org/@stryker-mutator/core/-/core-9.6.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @stryker-mutator/core@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/core"
+      ]
+    },
+    "@stryker-mutator/instrumenter": {
+      "version": "9.6.1",
+      "resolved": "https://registry.npmjs.org/@stryker-mutator/instrumenter/-/instrumenter-9.6.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @stryker-mutator/instrumenter@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/instrumenter"
+      ]
+    },
+    "@stryker-mutator/util": {
+      "version": "9.6.1",
+      "resolved": "https://registry.npmjs.org/@stryker-mutator/util/-/util-9.6.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @stryker-mutator/util@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/util"
+      ]
+    },
+    "@stryker-mutator/vitest-runner": {
+      "version": "9.6.1",
+      "resolved": "https://registry.npmjs.org/@stryker-mutator/vitest-runner/-/vitest-runner-9.6.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @stryker-mutator/vitest-runner@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@stryker-mutator/vitest-runner"
+      ]
+    },
+    "@testing-library/jest-dom": {
+      "version": "6.9.1",
+      "resolved": "https://registry.npmjs.org/@testing-library/jest-dom/-/jest-dom-6.9.1.tgz",
+      "overridden": false
+    },
+    "@testing-library/react": {
+      "version": "16.3.2",
+      "resolved": "https://registry.npmjs.org/@testing-library/react/-/react-16.3.2.tgz",
+      "overridden": false
+    },
+    "@types/jszip": {
+      "version": "3.4.0",
+      "resolved": "https://registry.npmjs.org/@types/jszip/-/jszip-3.4.0.tgz",
+      "overridden": false
+    },
+    "@types/node": {
+      "version": "24.13.2",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-24.13.2.tgz",
+      "overridden": false
+    },
+    "@types/opentype.js": {
+      "version": "1.3.10",
+      "resolved": "https://registry.npmjs.org/@types/opentype.js/-/opentype.js-1.3.10.tgz",
+      "overridden": false
+    },
+    "@types/paper": {
+      "version": "0.11.14",
+      "resolved": "https://registry.npmjs.org/@types/paper/-/paper-0.11.14.tgz",
+      "overridden": false
+    },
+    "@types/react-dom": {
+      "version": "19.2.3",
+      "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.2.3.tgz",
+      "overridden": false
+    },
+    "@types/react-window": {
+      "version": "1.8.8",
+      "resolved": "https://registry.npmjs.org/@types/react-window/-/react-window-1.8.8.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @types/react-window@1.8.8 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/@types/react-window"
+      ]
+    },
+    "@types/react": {
+      "version": "19.2.17",
+      "resolved": "https://registry.npmjs.org/@types/react/-/react-19.2.17.tgz",
+      "overridden": false
+    },
+    "@types/uuid": {
+      "version": "10.0.0",
+      "resolved": "https://registry.npmjs.org/@types/uuid/-/uuid-10.0.0.tgz",
+      "overridden": false
+    },
+    "@vitejs/plugin-react": {
+      "version": "6.0.2",
+      "resolved": "https://registry.npmjs.org/@vitejs/plugin-react/-/plugin-react-6.0.2.tgz",
+      "overridden": false
+    },
+    "angular-html-parser": {
+      "version": "10.4.0",
+      "resolved": "https://registry.npmjs.org/angular-html-parser/-/angular-html-parser-10.4.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: angular-html-parser@10.4.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/angular-html-parser"
+      ]
+    },
+    "ansi-escapes": {
+      "version": "7.3.0",
+      "resolved": "https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-7.3.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: ansi-escapes@7.3.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/ansi-escapes"
+      ]
+    },
+    "bwip-js": {
+      "version": "4.11.2",
+      "resolved": "https://registry.npmjs.org/bwip-js/-/bwip-js-4.11.2.tgz",
+      "overridden": false
+    },
+    "chalk": {
+      "version": "5.6.2",
+      "resolved": "https://registry.npmjs.org/chalk/-/chalk-5.6.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: chalk@5.6.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/chalk"
+      ]
+    },
+    "chardet": {
+      "version": "2.2.0",
+      "resolved": "https://registry.npmjs.org/chardet/-/chardet-2.2.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: chardet@2.2.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/chardet"
+      ]
+    },
+    "cli-cursor": {
+      "version": "5.0.0",
+      "resolved": "https://registry.npmjs.org/cli-cursor/-/cli-cursor-5.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: cli-cursor@5.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/cli-cursor"
+      ]
+    },
+    "cli-truncate": {
+      "version": "5.2.0",
+      "resolved": "https://registry.npmjs.org/cli-truncate/-/cli-truncate-5.2.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: cli-truncate@5.2.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/cli-truncate"
+      ]
+    },
+    "cli-width": {
+      "version": "4.1.0",
+      "resolved": "https://registry.npmjs.org/cli-width/-/cli-width-4.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: cli-width@4.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/cli-width"
+      ]
+    },
+    "colorette": {
+      "version": "2.0.20",
+      "resolved": "https://registry.npmjs.org/colorette/-/colorette-2.0.20.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: colorette@2.0.20 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/colorette"
+      ]
+    },
+    "des.js": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/des.js/-/des.js-1.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: des.js@1.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/des.js"
+      ]
+    },
+    "diff-match-patch": {
+      "version": "1.0.5",
+      "resolved": "https://registry.npmjs.org/diff-match-patch/-/diff-match-patch-1.0.5.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: diff-match-patch@1.0.5 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/diff-match-patch"
+      ]
+    },
+    "dxf-parser": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/dxf-parser/-/dxf-parser-1.1.2.tgz",
+      "overridden": false
+    },
+    "emoji-regex": {
+      "version": "10.6.0",
+      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.6.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: emoji-regex@10.6.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/emoji-regex"
+      ]
+    },
+    "environment": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/environment/-/environment-1.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: environment@1.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/environment"
+      ]
+    },
+    "eslint-plugin-react-hooks": {
+      "version": "7.1.1",
+      "resolved": "https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-7.1.1.tgz",
+      "overridden": false
+    },
+    "eslint-plugin-react-refresh": {
+      "version": "0.5.3",
+      "resolved": "https://registry.npmjs.org/eslint-plugin-react-refresh/-/eslint-plugin-react-refresh-0.5.3.tgz",
+      "overridden": false
+    },
+    "eslint": {
+      "version": "10.5.0",
+      "resolved": "https://registry.npmjs.org/eslint/-/eslint-10.5.0.tgz",
+      "overridden": false
+    },
+    "eventemitter3": {
+      "version": "5.0.4",
+      "resolved": "https://registry.npmjs.org/eventemitter3/-/eventemitter3-5.0.4.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: eventemitter3@5.0.4 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/eventemitter3"
+      ]
+    },
+    "execa": {
+      "version": "9.6.1",
+      "resolved": "https://registry.npmjs.org/execa/-/execa-9.6.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: execa@9.6.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/execa"
+      ]
+    },
+    "fabric": {
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/fabric/-/fabric-7.4.0.tgz",
+      "overridden": false
+    },
+    "fast-string-truncated-width": {
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/fast-string-truncated-width/-/fast-string-truncated-width-3.0.3.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: fast-string-truncated-width@3.0.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/fast-string-truncated-width"
+      ]
+    },
+    "fast-string-width": {
+      "version": "3.0.2",
+      "resolved": "https://registry.npmjs.org/fast-string-width/-/fast-string-width-3.0.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: fast-string-width@3.0.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/fast-string-width"
+      ]
+    },
+    "fast-wrap-ansi": {
+      "version": "0.2.2",
+      "resolved": "https://registry.npmjs.org/fast-wrap-ansi/-/fast-wrap-ansi-0.2.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: fast-wrap-ansi@0.2.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/fast-wrap-ansi"
+      ]
+    },
+    "figures": {
+      "version": "6.1.0",
+      "resolved": "https://registry.npmjs.org/figures/-/figures-6.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: figures@6.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/figures"
+      ]
+    },
+    "get-east-asian-width": {
+      "version": "1.6.0",
+      "resolved": "https://registry.npmjs.org/get-east-asian-width/-/get-east-asian-width-1.6.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: get-east-asian-width@1.6.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/get-east-asian-width"
+      ]
+    },
+    "get-stream": {
+      "version": "9.0.1",
+      "resolved": "https://registry.npmjs.org/get-stream/-/get-stream-9.0.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: get-stream@9.0.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/get-stream"
+      ]
+    },
+    "globals": {
+      "version": "17.6.0",
+      "resolved": "https://registry.npmjs.org/globals/-/globals-17.6.0.tgz",
+      "overridden": false
+    },
+    "human-signals": {
+      "version": "8.0.1",
+      "resolved": "https://registry.npmjs.org/human-signals/-/human-signals-8.0.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: human-signals@8.0.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/human-signals"
+      ]
+    },
+    "husky": {
+      "version": "9.1.7",
+      "resolved": "https://registry.npmjs.org/husky/-/husky-9.1.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: husky@9.1.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/husky"
+      ]
+    },
+    "i18next-browser-languagedetector": {
+      "version": "8.2.1",
+      "resolved": "https://registry.npmjs.org/i18next-browser-languagedetector/-/i18next-browser-languagedetector-8.2.1.tgz",
+      "overridden": false
+    },
+    "i18next": {
+      "version": "26.3.1",
+      "resolved": "https://registry.npmjs.org/i18next/-/i18next-26.3.1.tgz",
+      "overridden": false
+    },
+    "is-fullwidth-code-point": {
+      "version": "5.1.0",
+      "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-5.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: is-fullwidth-code-point@5.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/is-fullwidth-code-point"
+      ]
+    },
+    "is-plain-obj": {
+      "version": "4.1.0",
+      "resolved": "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-4.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: is-plain-obj@4.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/is-plain-obj"
+      ]
+    },
+    "is-unicode-supported": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/is-unicode-supported/-/is-unicode-supported-2.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: is-unicode-supported@2.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/is-unicode-supported"
+      ]
+    },
+    "js-md4": {
+      "version": "0.3.2",
+      "resolved": "https://registry.npmjs.org/js-md4/-/js-md4-0.3.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: js-md4@0.3.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/js-md4"
+      ]
+    },
+    "jsdom": {
+      "version": "29.1.1",
+      "resolved": "https://registry.npmjs.org/jsdom/-/jsdom-29.1.1.tgz",
+      "overridden": false
+    },
+    "json-rpc-2.0": {
+      "version": "1.7.1",
+      "resolved": "https://registry.npmjs.org/json-rpc-2.0/-/json-rpc-2.0-1.7.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: json-rpc-2.0@1.7.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/json-rpc-2.0"
+      ]
+    },
+    "jszip": {
+      "version": "3.10.1",
+      "resolved": "https://registry.npmjs.org/jszip/-/jszip-3.10.1.tgz",
+      "overridden": false
+    },
+    "lint-staged": {
+      "version": "16.4.0",
+      "resolved": "https://registry.npmjs.org/lint-staged/-/lint-staged-16.4.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: lint-staged@16.4.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/lint-staged"
+      ]
+    },
+    "listr2": {
+      "version": "9.0.5",
+      "resolved": "https://registry.npmjs.org/listr2/-/listr2-9.0.5.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: listr2@9.0.5 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/listr2"
+      ]
+    },
+    "lodash.groupby": {
+      "version": "4.6.0",
+      "resolved": "https://registry.npmjs.org/lodash.groupby/-/lodash.groupby-4.6.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: lodash.groupby@4.6.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/lodash.groupby"
+      ]
+    },
+    "log-update": {
+      "version": "6.1.0",
+      "resolved": "https://registry.npmjs.org/log-update/-/log-update-6.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: log-update@6.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/log-update"
+      ]
+    },
+    "lucide-react": {
+      "version": "1.23.0",
+      "resolved": "https://registry.npmjs.org/lucide-react/-/lucide-react-1.23.0.tgz",
+      "overridden": false
+    },
+    "mimic-function": {
+      "version": "5.0.1",
+      "resolved": "https://registry.npmjs.org/mimic-function/-/mimic-function-5.0.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: mimic-function@5.0.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mimic-function"
+      ]
+    },
+    "minimalistic-assert": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: minimalistic-assert@1.0.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/minimalistic-assert"
+      ]
+    },
+    "mutation-server-protocol": {
+      "version": "0.4.1",
+      "resolved": "https://registry.npmjs.org/mutation-server-protocol/-/mutation-server-protocol-0.4.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: mutation-server-protocol@0.4.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mutation-server-protocol"
+      ]
+    },
+    "mutation-testing-elements": {
+      "version": "3.7.3",
+      "resolved": "https://registry.npmjs.org/mutation-testing-elements/-/mutation-testing-elements-3.7.3.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: mutation-testing-elements@3.7.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mutation-testing-elements"
+      ]
+    },
+    "mutation-testing-metrics": {
+      "version": "3.7.3",
+      "resolved": "https://registry.npmjs.org/mutation-testing-metrics/-/mutation-testing-metrics-3.7.3.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: mutation-testing-metrics@3.7.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mutation-testing-metrics"
+      ]
+    },
+    "mutation-testing-report-schema": {
+      "version": "3.7.3",
+      "resolved": "https://registry.npmjs.org/mutation-testing-report-schema/-/mutation-testing-report-schema-3.7.3.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: mutation-testing-report-schema@3.7.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mutation-testing-report-schema"
+      ]
+    },
+    "mute-stream": {
+      "version": "3.0.0",
+      "resolved": "https://registry.npmjs.org/mute-stream/-/mute-stream-3.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: mute-stream@3.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/mute-stream"
+      ]
+    },
+    "npm-run-path": {
+      "version": "6.0.0",
+      "resolved": "https://registry.npmjs.org/npm-run-path/-/npm-run-path-6.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: npm-run-path@6.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/npm-run-path"
+      ]
+    },
+    "onetime": {
+      "version": "7.0.0",
+      "resolved": "https://registry.npmjs.org/onetime/-/onetime-7.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: onetime@7.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/onetime"
+      ]
+    },
+    "opentype.js": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/opentype.js/-/opentype.js-2.0.0.tgz",
+      "overridden": false
+    },
+    "paper": {
+      "version": "0.12.18",
+      "resolved": "https://registry.npmjs.org/paper/-/paper-0.12.18.tgz",
+      "overridden": false
+    },
+    "parse-ms": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/parse-ms/-/parse-ms-4.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: parse-ms@4.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/parse-ms"
+      ]
+    },
+    "polygon-offset": {
+      "version": "0.3.2",
+      "resolved": "https://registry.npmjs.org/polygon-offset/-/polygon-offset-0.3.2.tgz",
+      "overridden": false
+    },
+    "pretty-ms": {
+      "version": "9.3.0",
+      "resolved": "https://registry.npmjs.org/pretty-ms/-/pretty-ms-9.3.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: pretty-ms@9.3.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/pretty-ms"
+      ]
+    },
+    "progress": {
+      "version": "2.0.3",
+      "resolved": "https://registry.npmjs.org/progress/-/progress-2.0.3.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: progress@2.0.3 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/progress"
+      ]
+    },
+    "qs": {
+      "version": "6.15.1",
+      "resolved": "https://registry.npmjs.org/qs/-/qs-6.15.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: qs@6.15.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/qs"
+      ]
+    },
+    "react-dom": {
+      "version": "19.2.7",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.7.tgz",
+      "overridden": false
+    },
+    "react-i18next": {
+      "version": "17.0.8",
+      "resolved": "https://registry.npmjs.org/react-i18next/-/react-i18next-17.0.8.tgz",
+      "overridden": false
+    },
+    "react-window": {
+      "version": "2.2.7",
+      "resolved": "https://registry.npmjs.org/react-window/-/react-window-2.2.7.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: react-window@2.2.7 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/react-window"
+      ]
+    },
+    "react": {
+      "version": "19.2.7",
+      "resolved": "https://registry.npmjs.org/react/-/react-19.2.7.tgz",
+      "overridden": false
+    },
+    "restore-cursor": {
+      "version": "5.1.0",
+      "resolved": "https://registry.npmjs.org/restore-cursor/-/restore-cursor-5.1.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: restore-cursor@5.1.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/restore-cursor"
+      ]
+    },
+    "rfdc": {
+      "version": "1.4.1",
+      "resolved": "https://registry.npmjs.org/rfdc/-/rfdc-1.4.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: rfdc@1.4.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/rfdc"
+      ]
+    },
+    "rxjs": {
+      "version": "7.8.2",
+      "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-7.8.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: rxjs@7.8.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/rxjs"
+      ]
+    },
+    "slice-ansi": {
+      "version": "8.0.0",
+      "resolved": "https://registry.npmjs.org/slice-ansi/-/slice-ansi-8.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: slice-ansi@8.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/slice-ansi"
+      ]
+    },
+    "string-argv": {
+      "version": "0.3.2",
+      "resolved": "https://registry.npmjs.org/string-argv/-/string-argv-0.3.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: string-argv@0.3.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/string-argv"
+      ]
+    },
+    "string-width": {
+      "version": "8.2.2",
+      "resolved": "https://registry.npmjs.org/string-width/-/string-width-8.2.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: string-width@8.2.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/string-width"
+      ]
+    },
+    "strip-ansi": {
+      "version": "7.2.0",
+      "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-7.2.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: strip-ansi@7.2.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/strip-ansi"
+      ]
+    },
+    "strip-final-newline": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/strip-final-newline/-/strip-final-newline-4.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: strip-final-newline@4.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/strip-final-newline"
+      ]
+    },
+    "tree-kill": {
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/tree-kill/-/tree-kill-1.2.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: tree-kill@1.2.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/tree-kill"
+      ]
+    },
+    "tslib": {
+      "version": "2.8.1",
+      "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: tslib@2.8.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/tslib"
+      ]
+    },
+    "tunnel": {
+      "version": "0.0.6",
+      "resolved": "https://registry.npmjs.org/tunnel/-/tunnel-0.0.6.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: tunnel@0.0.6 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/tunnel"
+      ]
+    },
+    "typed-inject": {
+      "version": "5.0.0",
+      "resolved": "https://registry.npmjs.org/typed-inject/-/typed-inject-5.0.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: typed-inject@5.0.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/typed-inject"
+      ]
+    },
+    "typed-rest-client": {
+      "version": "2.3.1",
+      "resolved": "https://registry.npmjs.org/typed-rest-client/-/typed-rest-client-2.3.1.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: typed-rest-client@2.3.1 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/typed-rest-client"
+      ]
+    },
+    "typescript-eslint": {
+      "version": "8.61.1",
+      "resolved": "https://registry.npmjs.org/typescript-eslint/-/typescript-eslint-8.61.1.tgz",
+      "overridden": false
+    },
+    "typescript": {
+      "version": "6.0.3",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-6.0.3.tgz",
+      "overridden": false
+    },
+    "underscore": {
+      "version": "1.13.8",
+      "resolved": "https://registry.npmjs.org/underscore/-/underscore-1.13.8.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: underscore@1.13.8 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/underscore"
+      ]
+    },
+    "unicorn-magic": {
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/unicorn-magic/-/unicorn-magic-0.3.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: unicorn-magic@0.3.0 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/unicorn-magic"
+      ]
+    },
+    "uuid": {
+      "version": "14.0.1",
+      "resolved": "https://registry.npmjs.org/uuid/-/uuid-14.0.1.tgz",
+      "overridden": false
+    },
+    "vite-plugin-pwa": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/vite-plugin-pwa/-/vite-plugin-pwa-1.3.0.tgz",
+      "overridden": false
+    },
+    "vite": {
+      "version": "8.0.16",
+      "resolved": "https://registry.npmjs.org/vite/-/vite-8.0.16.tgz",
+      "overridden": false
+    },
+    "vitest": {
+      "version": "4.1.10",
+      "resolved": "https://registry.npmjs.org/vitest/-/vitest-4.1.10.tgz",
+      "overridden": false
+    },
+    "weapon-regex": {
+      "version": "1.3.6",
+      "resolved": "https://registry.npmjs.org/weapon-regex/-/weapon-regex-1.3.6.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: weapon-regex@1.3.6 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/weapon-regex"
+      ]
+    },
+    "wrap-ansi": {
+      "version": "9.0.2",
+      "resolved": "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-9.0.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: wrap-ansi@9.0.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/wrap-ansi"
+      ]
+    },
+    "yoctocolors": {
+      "version": "2.1.2",
+      "resolved": "https://registry.npmjs.org/yoctocolors/-/yoctocolors-2.1.2.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: yoctocolors@2.1.2 /home/thomas/Antigravity_Projects/TTS10/frontend/node_modules/yoctocolors"
+      ]
+    }
+  }
+}

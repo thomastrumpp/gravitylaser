@@ -36,6 +36,12 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
   const [backlashXStr, setBacklashXStr] = useState((settings.backlashX || 0).toString());
   const [backlashYStr, setBacklashYStr] = useState((settings.backlashY || 0).toString());
 
+  // Rotary State
+  const [rotaryEnabled, setRotaryEnabled] = useState(settings.rotaryEnabled || false);
+  const [rotaryMode, setRotaryMode] = useState<'roller' | 'chuck'>(settings.rotaryMode || 'roller');
+  const [rotaryObjectDiameterStr, setRotaryObjectDiameterStr] = useState((settings.rotaryObjectDiameter || 50).toString());
+  const [rotaryRollerDiameterStr, setRotaryRollerDiameterStr] = useState((settings.rotaryRollerDiameter || 16).toString());
+
   // WLAN Wizard State
   const [ssid, setSsid] = useState('');
   const [password, setPassword] = useState('');
@@ -99,7 +105,11 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
       cameraIpUrl,
       cameraOpacity,
       cameraK1,
-      cameraK2
+      cameraK2,
+      rotaryEnabled,
+      rotaryMode,
+      rotaryObjectDiameter: parseFloat(rotaryObjectDiameterStr) || 50,
+      rotaryRollerDiameter: parseFloat(rotaryRollerDiameterStr) || 16
     });
     
     // Arbeitsbereichsgröße automatisch an den GRBL-Controller senden
@@ -420,6 +430,58 @@ export const MachineSettingsModal: React.FC<Props> = ({ onClose, initialTab = 'v
                   <option value={5}>5.0 mm</option>
                   <option value={10}>10 mm</option>
                 </select>
+              </div>
+
+              {/* ROTARY SETTINGS */}
+              <div className="form-group" style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
+                <h3 style={{ marginTop: 0, marginBottom: '12px', fontSize: '13px', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  🔄 Rotary (Drehachse)
+                </h3>
+                
+                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '12px' }}>
+                  <input 
+                    type="checkbox" 
+                    checked={rotaryEnabled} 
+                    onChange={e => setRotaryEnabled(e.target.checked)}
+                  />
+                  <span>Rotary-Modus aktivieren</span>
+                </label>
+
+                {rotaryEnabled && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginLeft: '24px' }}>
+                    <div className="form-group">
+                      <label className="form-label">Modus</label>
+                      <select className="form-input" value={rotaryMode} onChange={e => setRotaryMode(e.target.value as 'roller' | 'chuck')}>
+                        <option value="roller">Roller (Walze)</option>
+                        <option value="chuck">Chuck (Spannfutter)</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">Objekt-Durchmesser (mm)</label>
+                      <input 
+                        type="number" 
+                        className="form-input" 
+                        value={rotaryObjectDiameterStr}
+                        onChange={e => setRotaryObjectDiameterStr(e.target.value)}
+                        min="1"
+                      />
+                    </div>
+
+                    {rotaryMode === 'roller' && (
+                      <div className="form-group">
+                        <label className="form-label">Roller-Durchmesser (mm)</label>
+                        <input 
+                          type="number" 
+                          className="form-input" 
+                          value={rotaryRollerDiameterStr}
+                          onChange={e => setRotaryRollerDiameterStr(e.target.value)}
+                          min="1"
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </>
           )}

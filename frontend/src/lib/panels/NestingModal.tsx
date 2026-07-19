@@ -20,7 +20,7 @@ export const NestingModal: React.FC<NestingModalProps> = ({ onClose }) => {
   const [error, setError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleNest = () => {
+  const handleNest = async () => {
     setError('');
     setIsProcessing(true);
     const fabricCanvas = (window as any).fabricCanvas;
@@ -64,7 +64,7 @@ export const NestingModal: React.FC<NestingModalProps> = ({ onClose }) => {
         lockInnerObjects
       };
 
-      const result = NestingService.nest(
+      const result = await NestingService.nest(
         targetObjects,
         settings.workingSizeX * scalePxPerMm,
         settings.workingSizeY * scalePxPerMm,

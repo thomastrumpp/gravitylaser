@@ -27,6 +27,7 @@ import { BatchProductionModal } from './lib/panels/BatchProductionModal';
 import { PrintAndCutWizard } from './lib/panels/PrintAndCutWizard';
 import { CameraAlignmentWizard } from './lib/panels/CameraAlignmentWizard';
 import { NestingModal } from './lib/panels/NestingModal';
+import { GridArrayModal } from './lib/panels/GridArrayModal';
 import { MacroPanel } from './lib/panels/MacroPanel';
 import { WebToolImporterModal } from './lib/panels/WebToolImporterModal';
 import { TestsuiteModal } from './lib/panels/TestsuiteModal';
@@ -49,6 +50,7 @@ const App: React.FC = () => {
   const [isPrintCutOpen, setIsPrintCutOpen] = useState(false);
   const [isCameraAlignOpen, setIsCameraAlignOpen] = useState(false);
   const [isNestingOpen, setIsNestingOpen] = useState(false);
+  const [isGridArrayOpen, setIsGridArrayOpen] = useState(false);
   const [isWebImportOpen, setIsWebImportOpen] = useState(false);
   const [isTestsuiteOpen, setIsTestsuiteOpen] = useState(false);
   
@@ -91,6 +93,7 @@ const App: React.FC = () => {
       if (modal === 'printcut') setIsPrintCutOpen(true);
       if (modal === 'camera-align') setIsCameraAlignOpen(true);
       if (modal === 'nesting') setIsNestingOpen(true);
+      if (modal === 'grid-array') setIsGridArrayOpen(true);
       if (modal === 'web-import') setIsWebImportOpen(true);
     };
     window.addEventListener('openModal', handleOpenModal);
@@ -864,6 +867,11 @@ const App: React.FC = () => {
       {/* Testsuite Modal */}
       {isTestsuiteOpen && (
         <TestsuiteModal onClose={() => setIsTestsuiteOpen(false)} />
+      )}
+
+      {/* Grid Array Modal */}
+      {isGridArrayOpen && (
+        <GridArrayModal onClose={() => setIsGridArrayOpen(false)} />
       )}
 
       {/* Web Import Modal */}

@@ -1593,6 +1593,57 @@ export const LaserCanvas: React.FC = () => {
         });
         
         handleSelection();
+      } else if (action === 'create-grid-array') {
+        const { columns, rows, spacingX, spacingY } = customEvent.detail;
+        if (!activeObj) return;
+
+        consoleStore.logLine(`Erstelle Grid Array (${columns}x${rows})...`, "info");
+        
+        const scaleX = activeObj.scaleX || 1;
+        const scaleY = activeObj.scaleY || 1;
+        const width = (activeObj.width || 0) * scaleX;
+        const height = (activeObj.height || 0) * scaleY;
+        
+        const startLeft = activeObj.left || 0;
+        const startTop = activeObj.top || 0;
+
+        const newObjects: any[] = [];
+        let completedCount = 0;
+        const totalToClone = (rows * columns) - 1;
+
+        if (totalToClone <= 0) return;
+
+        canvas.discardActiveObject();
+
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < columns; c++) {
+            if (r === 0 && c === 0) continue; // Original behalten
+            
+            activeObj.clone().then((cloned: any) => {
+                cloned.set({
+                    left: startLeft + (c * (width + spacingX * scalePxPerMm)),
+                    top: startTop + (r * (height + spacingY * scalePxPerMm)),
+                });
+                
+                const newId = uuidv4();
+                const oldData = cloned.get('data') || {};
+                cloned.set('data', { ...oldData, gravityId: newId });
+                
+                canvas.add(cloned);
+                newObjects.push(cloned);
+                
+                completedCount++;
+                if (completedCount === totalToClone) {
+                   const allItems = [activeObj, ...newObjects];
+                   const sel = new fabric.ActiveSelection(allItems, { canvas });
+                   canvas.setActiveObject(sel);
+                   canvas.requestRenderAll();
+                   consoleStore.logLine(`Grid Array erstellt.`, "info");
+                   handleSelection();
+                }
+            });
+          }
+        }
       }
     };
     window.addEventListener('canvasAction', handleCanvasAction);
@@ -1796,6 +1847,7 @@ export const LaserCanvas: React.FC = () => {
       });
       machineBg.set('fill', pattern);
       canvas.requestRenderAll();
+      URL.revokeObjectURL(url); // Verhindert Memory Leak
     };
     img.src = url;
 

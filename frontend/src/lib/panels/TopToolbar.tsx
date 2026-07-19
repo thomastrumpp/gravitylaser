@@ -70,7 +70,18 @@ export const TopToolbar: React.FC = () => {
         </div>
       )}
 
-      {/* Die Assistenten (Testsuite, Print & Cut, Nesting) wurden ins Hauptmenü (App.tsx) verschoben */}
+      {/* Assistenten */}
+      <div style={{ display: 'flex', gap: '8px', borderLeft: '1px solid var(--border-color)', paddingLeft: '12px' }}>
+        <button 
+          className="btn btn-secondary" 
+          onClick={() => window.dispatchEvent(new CustomEvent('openModal', { detail: { modal: 'grid-array' } }))}
+          style={{ fontSize: '12px', padding: '4px 8px' }}
+          disabled={!selectedObject.selectedObject}
+          title="Raster aus dem ausgewählten Objekt erstellen"
+        >
+          ⚄ Grid Array
+        </button>
+      </div>
     </div>
   );
 };

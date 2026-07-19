@@ -131,7 +131,7 @@ export const BatchProductionModal: React.FC<BatchProductionModalProps> = ({ onCl
 
     try {
       setError('');
-      const gcode = gcodeGen.generate(objects);
+      const gcode = await gcodeGen.generate(objects);
       await gcodeStreamer.start(gcode);
       setIsRunningBatch(true);
     } catch (err: any) {

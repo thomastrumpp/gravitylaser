@@ -71,9 +71,22 @@ export class GcodeGenerator {
 
   public mapY(yCanv: number): number {
     const settings = settingsStore.get();
-    if (settings.origin.includes('Bottom')) return settings.workingSizeY - yCanv;
-    if (settings.origin === 'Center') return (settings.workingSizeY / 2) - yCanv;
-    return yCanv;
+    let y = yCanv;
+    if (settings.origin.includes('Bottom')) y = settings.workingSizeY - yCanv;
+    else if (settings.origin === 'Center') y = (settings.workingSizeY / 2) - yCanv;
+    
+    // Rotary Attachment Scaling
+    if (settings.rotaryEnabled) {
+      if (settings.rotaryMode === 'chuck') {
+        const circumference = settings.rotaryObjectDiameter * Math.PI;
+        y = y * (360.0 / Math.max(0.1, circumference));
+      } else {
+        // Roller mode scaling based on Object / Roller ratio (often used if Y-axis steps are uncalibrated for rotary)
+        y = y * (settings.rotaryObjectDiameter / Math.max(0.1, settings.rotaryRollerDiameter));
+      }
+    }
+    
+    return y;
   }
 
   public mapXY(xCanv: number, yCanv: number): { x: number; y: number } {
@@ -87,7 +100,7 @@ export class GcodeGenerator {
   /**
    * Generiert den kompletten G-Code aus einer Liste von Canvas-Objekten
    */
-  public generate(objects: CanvasObjectData[]): string {
+  public async generate(objects: CanvasObjectData[]): Promise<string> {
     const layers = layersStore.get();
     
     // Auflösung von Variablen-Templates (Date, Time, Serial, CSV)
@@ -381,12 +394,14 @@ export class GcodeGenerator {
               }
             } else if (objType === 'path') {
               if (mode === 'fill') {
-                this.generateImageGcode(obj, activeLayerSettings, gcodeLines);
+                await this.generateImageGcode(obj, activeLayerSettings, gcodeLines);
               } else {
                 this.generatePathGcode(obj, activeLayerSettings, gcodeLines);
               }
-            } else if (objType === 'image' || objType === 'text' || objType === 'i-text') {
-              this.generateImageGcode(obj, activeLayerSettings, gcodeLines);
+            } else if (objType === 'image' && obj.imageElement) {
+              await this.generateImageGcode(obj, activeLayerSettings, gcodeLines);
+            } else if (objType === 'text' || objType === 'i-text') {
+              await this.generateImageGcode(obj, activeLayerSettings, gcodeLines);
             } else {
               gcodeLines.push(`; [WARNUNG] G-Code für Typ ${obj.type} nicht vollständig implementiert`);
             }
@@ -759,9 +774,11 @@ export class GcodeGenerator {
   }
 
   /**
-   * Generiert G-Code für Bilder (Grayscale Raster Gravur)
+   * Generiert G-Code für Rasterbilder (Graustufen oder 1-Bit Dither/Threshold).
    */
-  private generateImageGcode(obj: CanvasObjectData, layer: LayerSettings, lines: string[]) {
+  private async generateImageGcode(obj: CanvasObjectData, layer: LayerSettings, lines: string[]) {
+    // Falls das Objekt noch nicht gerendert ist
+    if (!obj.width || !obj.height) return;
     const interval = obj.customInterval ?? (obj.isRasterizedVector ? 0.08 : 0.2); // 0.08mm für dichte Vektor-Gravuren, 0.2mm für Standard-Bilder
     
     const wUnrotated = obj.width * obj.scaleX;
@@ -791,7 +808,7 @@ export class GcodeGenerator {
     const isTriangleObj = objType === 'triangle';
     const isEllipseObj = objType === 'ellipse';
     const isCircleObj = objType === 'circle';
-    const isVectorRaster = isTextObj || isPathObj || isTriangleObj || isEllipseObj || isCircleObj || obj.isRasterizedVector;
+    const isVectorRaster = isTextObj || isPathObj || isTriangleObj || isEllipseObj || isCircleObj || !!obj.isRasterizedVector;
     const imageMode = isVectorRaster ? 'threshold' : (obj.imageMode || 'grayscale');
     const ditherType = obj.ditherType || 'floyd-steinberg';
     const brightness = obj.brightness !== undefined ? obj.brightness : 0;
@@ -984,70 +1001,38 @@ export class GcodeGenerator {
         }
       }
     } else if (imageMode === 'dither') {
-      for (let r = 0; r < rows; r++) {
-        const isLeftToRight = r % 2 === 0;
-        const startC = isLeftToRight ? 0 : cols - 1;
-        const endC = isLeftToRight ? cols : -1;
-        const step = isLeftToRight ? 1 : -1;
-
-        const addError = (dc: number, dr: number, weight: number, divisor: number, currentC: number, currentR: number, err: number) => {
-          const nc = currentC + (isLeftToRight ? dc : -dc);
-          const nr = currentR + dr;
-          if (nc >= 0 && nc < cols && nr >= 0 && nr < rows) {
-            pixels[nr][nc] += err * (weight / divisor);
-          }
-        };
-
-        for (let c = startC; c !== endC; c += step) {
-          const oldVal = pixels[r][c];
-          const newVal = oldVal < thresholdValue ? 0 : 255;
-          pixels[r][c] = newVal;
-          const err = oldVal - newVal;
-
-          if (err === 0) continue;
-
-          if (ditherType === 'floyd-steinberg') {
-            addError(1, 0, 7, 16, c, r, err);
-            addError(-1, 1, 3, 16, c, r, err);
-            addError(0, 1, 5, 16, c, r, err);
-            addError(1, 1, 1, 16, c, r, err);
-          } else if (ditherType === 'atkinson') {
-            addError(1, 0, 1, 8, c, r, err);
-            addError(2, 0, 1, 8, c, r, err);
-            addError(-1, 1, 1, 8, c, r, err);
-            addError(0, 1, 1, 8, c, r, err);
-            addError(1, 1, 1, 8, c, r, err);
-            addError(0, 2, 1, 8, c, r, err);
-          } else if (ditherType === 'stucki') {
-            addError(1, 0, 8, 42, c, r, err);
-            addError(2, 0, 4, 42, c, r, err);
-            addError(-2, 1, 2, 42, c, r, err);
-            addError(-1, 1, 4, 42, c, r, err);
-            addError(0, 1, 8, 42, c, r, err);
-            addError(1, 1, 4, 42, c, r, err);
-            addError(2, 1, 2, 42, c, r, err);
-            addError(-2, 2, 1, 42, c, r, err);
-            addError(-1, 2, 2, 42, c, r, err);
-            addError(0, 2, 4, 42, c, r, err);
-            addError(1, 2, 2, 42, c, r, err);
-            addError(2, 2, 1, 42, c, r, err);
-          } else if (ditherType === 'jarvis') {
-            addError(1, 0, 7, 48, c, r, err);
-            addError(2, 0, 5, 48, c, r, err);
-            addError(-2, 1, 3, 48, c, r, err);
-            addError(-1, 1, 5, 48, c, r, err);
-            addError(0, 1, 7, 48, c, r, err);
-            addError(1, 1, 5, 48, c, r, err);
-            addError(2, 1, 3, 48, c, r, err);
-            addError(-2, 2, 1, 48, c, r, err);
-            addError(-1, 2, 3, 48, c, r, err);
-            addError(0, 2, 5, 48, c, r, err);
-            addError(1, 2, 3, 48, c, r, err);
-            addError(2, 2, 1, 48, c, r, err);
+      try {
+        const { ditheringService } = await import('../services/DitheringService');
+        const flatImageData = new Uint8ClampedArray(cols * rows * 4);
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const idx = (r * cols + c) * 4;
+            flatImageData[idx] = pixels[r][c];
+            flatImageData[idx+1] = pixels[r][c];
+            flatImageData[idx+2] = pixels[r][c];
+            flatImageData[idx+3] = 255;
           }
         }
+        
+        const resultData = await ditheringService.processImage(flatImageData, cols, rows, {
+          algorithm: ditherType as any,
+          thresholdValue: thresholdValue,
+          contrast: contrast,
+          brightness: brightness,
+          gamma: gamma
+        });
+
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            pixels[r][c] = resultData[(r * cols + c) * 4];
+          }
+        }
+      } catch (err) {
+        console.error("Dithering Error", err);
       }
     }
+
+    // 3. Optional: Invertierung am Ende, falls "Negative" Modus (z.B. für Stempel)
 
     lines.push(`; --- Start Raster Image scan (${cols}x${rows}) ---`);
     lines.push(`${laserMode} ; Laser-Modus aktivieren`);

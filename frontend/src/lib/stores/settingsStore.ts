@@ -22,6 +22,10 @@ export interface MachineSettings {
   cameraK1: number;
   cameraK2: number;
   cameraHomography: number[] | null;
+  rotaryEnabled: boolean;
+  rotaryMode: 'roller' | 'chuck';
+  rotaryObjectDiameter: number;
+  rotaryRollerDiameter: number;
 }
 
 const defaultSettings: MachineSettings = {
@@ -41,7 +45,11 @@ const defaultSettings: MachineSettings = {
   cameraOpacity: 0.5,
   cameraK1: 0.0,
   cameraK2: 0.0,
-  cameraHomography: null
+  cameraHomography: null,
+  rotaryEnabled: false,
+  rotaryMode: 'roller',
+  rotaryObjectDiameter: 50.0,
+  rotaryRollerDiameter: 16.0
 };
 
 class SettingsStore extends Store<MachineSettings> {

@@ -547,7 +547,7 @@ export const PropertiesPanel: React.FC = () => {
           </div>
 
           {/* Threshold Slider (Only for threshold or dither) */}
-          {(selectedObject.imageMode === 'threshold' || selectedObject.imageMode === 'dither') && (
+          {(selectedObject.imageMode === 'threshold' || selectedObject.imageMode === 'dither' || selectedObject.ditherType === 'atkinson' || selectedObject.ditherType === 'jarvis' || selectedObject.ditherType === 'stucki') && (
             <div className="form-group">
               <div className="flex-between">
                 <label className="form-label">{t('properties.threshold', 'Schwellenwert')}</label>
