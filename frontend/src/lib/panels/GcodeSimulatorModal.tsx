@@ -360,16 +360,24 @@ export const GcodeSimulatorModal: React.FC<GcodeSimulatorModalProps> = ({ gcode,
       const px2 = transformX(seg.x2);
       const py2 = transformY(seg.y2);
 
-      if (seg.isLaserOn) {
+      if (seg.isLaserOn && seg.power > 0) {
         ctx.beginPath();
         ctx.moveTo(px1, py1);
         ctx.lineTo(px2, py2);
+        
+        // Opazität basierend auf Power berechnen
+        const opacity = Math.max(0.05, seg.power / 1000);
+        ctx.globalAlpha = opacity;
+        
         ctx.strokeStyle = seg.color;
         
-        // Dicke skaliert mit der Intensität (Power)
-        ctx.lineWidth = 1 + (seg.power / 1000) * 2.5; 
+        // Dicke skaliert mit der Intensität leicht
+        ctx.lineWidth = 1 + (seg.power / 1000) * 1.5; 
         ctx.setLineDash([]);
         ctx.stroke();
+        
+        // Reset Alpha
+        ctx.globalAlpha = 1.0;
       } else if (showTravel) {
         ctx.beginPath();
         ctx.moveTo(px1, py1);
